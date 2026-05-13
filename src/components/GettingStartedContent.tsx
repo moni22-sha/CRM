@@ -1,5 +1,17 @@
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Target, Search, ClipboardList, Settings, Database, FlaskConical, Users, Rocket, TrendingUp } from "lucide-react";
+
+const STEPS = [
+  { title: "Identify Goals", icon: Target, desc: "Define what success looks like for your business." },
+  { title: "Select CRM", icon: Search, desc: "Choose the platform that fits your scaling needs." },
+  { title: "Create Plan", icon: ClipboardList, desc: "Map out the roadmap for a smooth rollout." },
+  { title: "Customize", icon: Settings, desc: "Tailor the system to your specific workflows." },
+  { title: "Migrate Data", icon: Database, desc: "Securely move your existing records into CRM." },
+  { title: "Test System", icon: FlaskConical, desc: "Ensure everything works as expected before launch." },
+  { title: "Train Team", icon: Users, desc: "Empower your staff with hands-on training sessions." },
+  { title: "Go Live", icon: Rocket, desc: "Officially launch and start managing relationships." },
+  { title: "Optimize", icon: TrendingUp, desc: "Continuously review and improve your processes." }
+];
 
 export default function GettingStartedContent() {
   return (
@@ -14,63 +26,96 @@ export default function GettingStartedContent() {
             <p className="text-xl text-slate-600 leading-relaxed mb-8">
               Learn why CRM implementation matters and how to successfully set it up for your business.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4 mb-16">
               <button className="px-8 py-4 bg-brand text-white font-bold rounded-xl shadow-lg shadow-brand/20">Learn More</button>
               <button className="px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border border-slate-200">Get Started Free</button>
             </div>
           </div>
 
-          <section className="mb-20 py-16 bg-slate-50/50">
-  <div className="max-w-7xl mx-auto px-4">
-    <h2 className="text-4xl font-bold text-slate-900 mb-20 italic text-center">
-      The Implementation Journey
-    </h2>
-    
-    <div className="relative">
-      {/* Thick Background Track - Visible on Desktop */}
-      <div className="absolute top-12 left-0 w-full h-1.5 bg-slate-200 -z-10 hidden md:block rounded-full" />
-
-      {/* Grid Container */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16">
-        {[
-          "Identify business goals",
-          "Select the right CRM",
-          "Create an implementation plan",
-          "Customise and integrate",
-          "Migrate data",
-          "Test the system",
-          "Train your team",
-          "Go live",
-          "Review and optimise"
-        ].map((step, i) => (
-          <div key={i} className="relative flex flex-col items-center">
-            
-            {/* The Station Node (Thick Circle) */}
-            <div className="w-24 h-24 bg-white border-[6px] border-slate-50 rounded-2xl flex items-center justify-center font-black text-3xl text-brand shadow-xl relative z-10 mb-8 transition-transform group-hover:scale-110">
-              <div className="absolute inset-0 border-2 border-slate-200 rounded-2xl opacity-20" />
-              {i + 1}
+          <section className="mb-20">
+            <h2 className="text-2xl font-bold text-slate-900 mb-8">What we’ll cover:</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                "Step-by-step implementation process",
+                "Defining business goals",
+                "Data migration best practices",
+                "Team training and adoption",
+                "Success stories & examples"
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 text-slate-600">
+                  <div className="w-2 h-2 bg-brand rounded-full" />
+                  {item}
+                </div>
+              ))}
             </div>
+          </section>
 
-            {/* The Card Style from image_eeb1b9.png */}
-            <div className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow w-full text-center min-h-[220px] flex flex-col justify-center">
-              <h4 className="text-xl font-bold text-slate-900 mb-4 italic leading-tight">
-                {step}
-              </h4>
-              <p className="text-slate-500 leading-relaxed text-sm italic">
-                Ensuring phase {i + 1} is completed with precision for a seamless business transition.
+          <section className="mb-20 space-y-8">
+            <div className="bg-slate-50 p-10 rounded-[2.5rem]">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4 font-display">What is CRM?</h2>
+              <p className="text-lg text-slate-600 leading-relaxed">
+                Customer Relationship Management (CRM) is a system designed to manage and improve interactions with both current and potential customers. It helps businesses organise data, automate workflows and align teams across sales, marketing, service, and IT.
               </p>
             </div>
+          </section>
 
-            {/* Vertical Row Connectors */}
-            {(i === 2 || i === 5) && (
-              <div className="hidden md:block absolute -bottom-16 left-1/2 w-1.5 h-16 bg-slate-200 -z-10 rounded-full" />
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+          <section className="mb-32">
+            <h2 className="text-4xl font-bold text-slate-900 mb-20 text-center italic">The <span className="text-brand">Implementation</span> Process</h2>
+            
+            <div className="relative py-10">
+              {/* The Trunk (Vertical Line) */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-100 -translate-x-1/2 hidden md:block">
+                <motion.div 
+                  initial={{ height: 0 }}
+                  whileInView={{ height: '100%' }}
+                  viewport={{ once: true }}
+                  className="w-full bg-brand origin-top"
+                />
+              </div>
+
+              <div className="relative space-y-16 md:space-y-24">
+                {STEPS.map((step, i) => (
+                  <div key={i} className={`flex flex-col md:flex-row items-center gap-8 md:gap-0 ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                    {/* Content Side */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className={`flex-1 w-full md:w-auto ${i % 2 === 0 ? 'md:pl-24' : 'md:pr-24'} text-center ${i % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}
+                    >
+                      <div className={`inline-flex items-center justify-center w-12 h-12 bg-slate-900 text-brand rounded-xl font-bold italic text-xl mb-4 shadow-lg`}>
+                        {i + 1}
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 italic">{step.title}</h3>
+                      <p className="text-slate-600 leading-relaxed italic max-w-sm mx-auto md:ml-0 md:mr-0 lg:max-w-md">
+                        {step.desc}
+                      </p>
+                    </motion.div>
+
+                    {/* Branch Point (The Node) */}
+                    <div className="relative flex-shrink-0 z-10 group">
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
+                        className="w-16 h-16 bg-white border-4 border-brand rounded-full flex items-center justify-center text-brand shadow-xl relative"
+                      >
+                        <step.icon className="w-8 h-8" />
+                        {/* Branch line to content (Desktop) */}
+                        <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-brand/30 w-24 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-brand w-0 group-hover:w-24 transition-all duration-500 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
+                      </motion.div>
+                    </div>
+
+                    {/* Empty Side (For spacing) */}
+                    <div className="flex-1 hidden md:block" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
           <section className="mb-20 bg-brand p-12 rounded-[3rem] text-white">
             <h2 className="text-3xl font-bold mb-6">Why work with an expert?</h2>

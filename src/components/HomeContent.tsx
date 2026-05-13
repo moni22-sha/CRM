@@ -132,12 +132,12 @@ export default function HomeContent() {
             <p>• Our CRM empowers your team to stay connected, organized, and focused — so you can turn every interaction into an opportunity.</p>
           </div>
           <div className="flex gap-6">
-             <button className="flex items-center gap-2 bg-brand/10 text-brand font-bold py-2 px-4 rounded-lg hover:bg-brand/20 hover:translate-x-1 transition-all">
-  <PlayCircle className="w-5 h-5" /> Watch Demo
-</button>
-            <button className="flex items-center gap-2 bg-brand text-white font-bold py-2 px-4 rounded-lg hover:bg-brand/90 hover:translate-x-1 transition-all">
-  Start Free Trial
-</button>
+             <button className="flex items-center gap-2 text-brand font-bold hover:translate-x-1 transition-transform">
+               <PlayCircle className="w-5 h-5" /> Watch Demo
+             </button>
+             <button className="flex items-center gap-2 text-brand font-bold hover:translate-x-1 transition-transform">
+               Start Free Trial
+             </button>
           </div>
         </motion.section>
 

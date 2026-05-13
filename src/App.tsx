@@ -24,6 +24,7 @@ import CRMCapabilitiesContent from "./components/CRMCapabilitiesContent";
 import CRMStrategiesContent from "./components/CRMStrategiesContent";
 import CRMAdvantagesContent from "./components/CRMAdvantagesContent";
 import CRMUseCasesContent from "./components/CRMUseCasesContent";
+import TermsAndConditionsContent from "./components/TermsAndConditionsContent";
 import CRMModulePage, { ModuleId, modulesData } from "./components/CRMModulePage";
 
 export default function App() {
@@ -50,6 +51,8 @@ export default function App() {
         return <CRMAdvantagesContent />;
       case "use-cases":
         return <CRMUseCasesContent />;
+      case "terms":
+        return <TermsAndConditionsContent />;
       case "home":
       default:
         return <HomeContent />;
@@ -62,7 +65,7 @@ export default function App() {
       <main>
         {renderContent()}
       </main>
-      <Footer />
+      <Footer onNavigate={setCurrentPage} />
     </div>
   );
 }

@@ -108,7 +108,7 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
                       <h4 className="text-[10px] uppercase font-bold text-slate-400 mb-6 tracking-widest">What is CRM?</h4>
                       <div className="space-y-4">
                         {[
-                          { id: 'overview', name: 'CRM Overview', icon: BarChart3, color: 'text-brand' },
+                          { id: 'overview', name: 'What is CRM?', icon: BarChart3, color: 'text-brand' },
                           { id: 'getting-started', name: 'Getting Started', icon: Rocket, color: 'text-purple-600' },
                           { id: 'capabilities', name: 'Capabilities', icon: ShieldCheck, color: 'text-emerald-600' }
                         ].map((item) => (

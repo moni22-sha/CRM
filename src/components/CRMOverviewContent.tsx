@@ -1,5 +1,13 @@
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Users, Share2, Zap, Maximize, BarChart3 } from "lucide-react";
+
+const BENEFITS = [
+  { title: "Centralized Management", icon: Users, desc: "Access accurate customer info across all teams instantly." },
+  { title: "Improved Collaboration", icon: Share2, desc: "Share information and align teams toward common goals." },
+  { title: "Easy Accessibility", icon: Zap, desc: "Cloud-based access from any device, anywhere, anytime." },
+  { title: "Scalability", icon: Maximize, desc: "Grow your business without technical disruptions or limits." },
+  { title: "Insights & Reporting", icon: BarChart3, desc: "Deeper analytics to drive smarter business decisions." }
+];
 
 export default function CRMOverviewContent() {
   return (
@@ -9,12 +17,11 @@ export default function CRMOverviewContent() {
         <div className="absolute inset-0 bg-[#00AEEF]/5 -z-10" />
         <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-brand/10 rounded-full blur-3xl" />
         
-      <div className="max-w-7xl mx-auto px-4">
-          {/* Change: Set max-w-4xl and mx-auto to center the motion div */}
+        <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl mx-auto flex flex-col items-center text-center"
+            className="max-w-3xl"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-full text-xs font-bold uppercase tracking-widest mb-8">
               <span className="relative flex h-2 w-2">
@@ -23,21 +30,18 @@ export default function CRMOverviewContent() {
               </span>
               Platform Overview
             </div>
-
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-8 leading-[1.1] italic">
-              The Engine Behind <br />
+              The Engine Behind <br/>
               <span className="text-brand">Seamless Growth.</span>
             </h1>
-
             <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl">
               Understand how modern CRM software transforms data into relationships. Our platform is built to eliminate silos and power up your entire business ecosystem.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button className="px-8 py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-xl shadow-slate-900/10 flex items-center justify-center gap-2 group italic">
                 Get Started Free <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-5 bg-white text-slate-700 font-bold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all italic flex items-center justify-center">
+              <button className="px-8 py-5 bg-white text-slate-700 font-bold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all italic">
                 Watch Demo
               </button>
             </div>
@@ -86,21 +90,61 @@ export default function CRMOverviewContent() {
             </div>
           </div>
 
-          <section className="mb-20">
-            <h2 className="text-3xl font-bold text-slate-900 mb-12">🚀 The Benefits of CRM Software</h2>
-            <div className="space-y-6">
-              {[
-                { title: "Centralized Contact Management", desc: "CRM ensures all teams have access to accurate and up-to-date customer information, including past interactions, purchase history, and service records." },
-                { title: "Improved Collaboration", desc: "Teams can easily share information and communicate within the system, ensuring everyone is aligned and working toward common goals." },
-                { title: "Easy Setup and Accessibility", desc: "Cloud-based CRM systems eliminate the need for hardware or complex installations, allowing businesses to get started quickly and focus on growth." },
-                { title: "Scalability", desc: "As your business grows, CRM systems can scale with you by adding users, features, and capabilities without disruption." },
-                { title: "Insights and Reporting", desc: "CRM platforms provide dashboards and analytics that help track performance, forecast trends, and guide smarter business decisions." }
-              ].map((benefit, i) => (
-                <div key={i} className="group p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl transition-all">
-                  <h4 className="text-xl font-bold text-slate-900 mb-2">🔹 {benefit.title}</h4>
-                  <p className="text-slate-600 leading-relaxed">{benefit.desc}</p>
-                </div>
-              ))}
+          <section className="mb-32">
+            <h2 className="text-4xl font-bold text-slate-900 mb-20 text-center italic">🚀 The <span className="text-brand">Benefits</span> of CRM Software</h2>
+            
+            <div className="relative py-10">
+              {/* The Trunk (Vertical Line) */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-100 -translate-x-1/2 hidden md:block">
+                <motion.div 
+                  initial={{ height: 0 }}
+                  whileInView={{ height: '100%' }}
+                  viewport={{ once: true }}
+                  className="w-full bg-brand origin-top"
+                />
+              </div>
+
+              <div className="relative space-y-16 md:space-y-24">
+                {BENEFITS.map((benefit, i) => (
+                  <div key={i} className={`flex flex-col md:flex-row items-center gap-8 md:gap-0 ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                    {/* Content Side */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className={`flex-1 w-full md:w-auto ${i % 2 === 0 ? 'md:pl-24' : 'md:pr-24'} text-center ${i % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}
+                    >
+                      <div className={`inline-flex items-center justify-center w-12 h-12 bg-slate-900 text-brand rounded-xl font-bold italic text-xl mb-4 shadow-lg`}>
+                        {i + 1}
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 italic">{benefit.title}</h3>
+                      <p className="text-slate-600 leading-relaxed italic max-w-sm mx-auto md:ml-0 md:mr-0 lg:max-w-md">
+                        {benefit.desc}
+                      </p>
+                    </motion.div>
+
+                    {/* Branch Point (The Node) */}
+                    <div className="relative flex-shrink-0 z-10 group">
+                      <motion.div 
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
+                        className="w-16 h-16 bg-white border-4 border-brand rounded-full flex items-center justify-center text-brand shadow-xl relative"
+                      >
+                        <benefit.icon className="w-8 h-8" />
+                        {/* Branch line to content (Desktop) */}
+                        <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-brand/30 w-24 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-brand w-0 group-hover:w-24 transition-all duration-500 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
+                      </motion.div>
+                    </div>
+
+                    {/* Empty Side (For spacing) */}
+                    <div className="flex-1 hidden md:block" />
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 

@@ -67,7 +67,14 @@ export function FinalCTA() {
   );
 }
 
-export function Footer() {
+export function Footer({ onNavigate }: { onNavigate?: (page: string) => void }) {
+  const navTo = (page: string) => {
+    if (onNavigate) {
+      onNavigate(page);
+      window.scrollTo(0, 0);
+    }
+  };
+
   return (
     <footer className="bg-white pt-24 pb-12 border-t border-slate-100 italic">
       <div className="max-w-7xl mx-auto px-4">
@@ -117,7 +124,7 @@ export function Footer() {
               <li><a href="#" className="hover:text-brand transition-colors">About Us</a></li>
               <li><a href="#" className="hover:text-brand transition-colors">Careers</a></li>
               <li><a href="#" className="hover:text-brand transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Terms of Service</a></li>
+              <li><button onClick={() => navTo('terms')} className="hover:text-brand transition-colors cursor-pointer">Terms of Service</button></li>
             </ul>
           </div>
 
