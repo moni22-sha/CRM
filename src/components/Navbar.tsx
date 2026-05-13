@@ -23,25 +23,14 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 italic">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 non-italic">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center gap-1 cursor-pointer group" onClick={() => navTo('home')}>
             <div className="flex items-center font-bold text-2xl tracking-tighter">
-              <span className="text-slate-900">theb</span>
-              <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center mx-0.5 transform group-hover:scale-110 transition-transform">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-white">
-                  <path d="M12 8V4H8" />
-                  <rect width="16" height="12" x="4" y="8" rx="2" />
-                  <path d="M2 14h2" />
-                  <path d="M20 14h2" />
-                  <path d="M15 13v2" />
-                  <path d="M9 13v2" />
-                </svg>
+              <span className="text-slate-900">thebot.</span>
               </div>
-              <span className="text-slate-900">t.</span>
-            </div>
           </div>
 
           {/* Desktop Nav */}

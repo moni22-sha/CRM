@@ -76,73 +76,30 @@ export function Footer({ onNavigate }: { onNavigate?: (page: string) => void }) 
   };
 
   return (
-    <footer className="bg-white pt-24 pb-12 border-t border-slate-100 italic">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 md:col-span-1">
-             <div className="flex items-center gap-1 cursor-pointer group mb-6" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                <div className="flex items-center font-bold text-2xl tracking-tighter">
-                  <span className="text-slate-900">theb</span>
-                  <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center mx-0.5 transform group-hover:scale-110 transition-transform">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-white">
-                      <path d="M12 8V4H8" />
-                      <rect width="16" height="12" x="4" y="8" rx="2" />
-                      <path d="M2 14h2" />
-                      <path d="M20 14h2" />
-                      <path d="M15 13v2" />
-                      <path d="M9 13v2" />
-                    </svg>
-                  </div>
-                  <span className="text-slate-900">t.</span>
-                </div>
-             </div>
-             <p className="text-slate-500 mb-6 leading-relaxed">
-               Advanced CRM platform designed to help businesses manage customer interactions and drive growth.
-             </p>
-             <div className="flex gap-4">
-               {[Mail, Phone, MapPin].map((Icon, i) => (
-                 <a key={i} href="#" className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-brand hover:bg-brand/5 transition-all">
-                   <Icon className="w-5 h-5" />
-                 </a>
-               ))}
-             </div>
-          </div>
+  <footer className="bg-blue-800  non-italic">
+  <div className="max-w-7xl mx-auto px-4">
+       
+      <div className="pt-12 border-t border-slate-50 flex flex-col md:flex-row items-center justify-between text-sm">
+      <p className="text-slate-400 text-white">
+        © {new Date().getFullYear()} The Bot CRM. All rights reserved.
+      </p>
 
-          <div>
-            <h4 className="font-bold text-slate-900 mb-6">Product</h4>
-            <ul className="space-y-4 text-slate-500">
-              <li><a href="#" className="hover:text-brand transition-colors">Sales CRM</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Marketing Automation</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Customer Support</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Operations Hub</a></li>
-            </ul>
-          </div>
+     
+      <button
+  onClick={() => navTo("privacy")}
+  className="text-slate-400 hover:text-brand transition-colors text-white"
+>
+  Privacy Policy
+</button>
 
-          <div>
-            <h4 className="font-bold text-slate-900 mb-6">Company</h4>
-            <ul className="space-y-4 text-slate-500">
-              <li><a href="#" className="hover:text-brand transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Privacy Policy</a></li>
-              <li><button onClick={() => navTo('terms')} className="hover:text-brand transition-colors cursor-pointer">Terms of Service</button></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-slate-900 mb-6">Resources</h4>
-            <ul className="space-y-4 text-slate-500">
-              <li><a href="#" className="hover:text-brand transition-colors">Documentation</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">Community</a></li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="pt-12 border-t border-slate-50 text-center text-slate-400 text-sm">
-          <p>© {new Date().getFullYear()} The Bot CRM. All rights reserved.</p>
-        </div>
+<button
+  onClick={() => navTo("terms")}
+  className="text-slate-400 hover:text-brand transition-colors text-white"
+>
+  Terms & Conditions
+</button>
       </div>
+    </div>
     </footer>
   );
 }

@@ -13,9 +13,9 @@ export default function CRMOverviewContent() {
   return (
     <div className="pt-20 pb-24 italic overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative py-24 md:py-32 mb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[#00AEEF]/5 -z-10" />
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 bg-brand/10 rounded-full blur-3xl" />
+      <section className="relative py-24 md:py-32 mb-20 overflow-hidden" style={{ background: "linear-gradient(135deg, #0a3fa8 0%, #1254c0 45%, #6d28d9 100%)" }}>
+        <div className="absolute inset-0 -z-10" />
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-96 h-96 opacity-30 rounded-full blur-3xl" style={{ background: "#a855f7" }} />
         
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
@@ -23,25 +23,25 @@ export default function CRMOverviewContent() {
             animate={{ opacity: 1, y: 0 }}
             className="max-w-3xl"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 text-brand rounded-full text-xs font-bold uppercase tracking-widest mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold uppercase tracking-widest mb-8 text-center">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white text-center"></span>
               </span>
               Platform Overview
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-8 leading-[1.1] italic">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-[1.1] non-italic">
               The Engine Behind <br/>
-              <span className="text-brand">Seamless Growth.</span>
+              <span className="text-#00c2ff">Seamless Growth.</span>
             </h1>
-            <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-2xl">
+            <p className="text-xl text-gray-100 leading-relaxed mb-10 max-w-2xl">
               Understand how modern CRM software transforms data into relationships. Our platform is built to eliminate silos and power up your entire business ecosystem.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-8 py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-xl shadow-slate-900/10 flex items-center justify-center gap-2 group italic">
+              <button className="px-8 py-5 bg-#00c2ff text-white font-bold rounded-2xl shadow-xl shadow-[#00c2ff]/80 flex items-center justify-center gap-2 group non-italic hover:bg-[#00a8e6] transition-all">
                 Get Started Free <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-5 bg-white text-slate-700 font-bold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all italic">
+              <button className="px-8 py-5 bg-white/10 text-white font-bold rounded-2xl border border-white/20 hover:bg-white/20 transition-all italic">
                 Watch Demo
               </button>
             </div>
@@ -68,10 +68,10 @@ export default function CRMOverviewContent() {
               </div>
             </div>
             <div className="bg-slate-50 p-10 rounded-[3rem] border border-slate-100 relative group">
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-brand rounded-2xl flex items-center justify-center shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform">
+              <div className="absolute -top-6 -right-6 w-12 h-12 bg-brand rounded-2xl flex items-center justify-center shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform bg-gradient-to-br from-green-400 to-green-600">
                 <CheckCircle2 className="text-white w-6 h-6" />
               </div>
-              <h4 className="text-xl font-bold text-slate-900 mb-6 italic">📚 What You’ll Learn</h4>
+              <h4 className="text-xl font-bold text-slate-900 mb-6 non-italic">📚 What You’ll Learn</h4>
               <div className="grid gap-4">
                 {[
                   "What CRM software is",

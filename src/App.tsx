@@ -26,6 +26,9 @@ import CRMAdvantagesContent from "./components/CRMAdvantagesContent";
 import CRMUseCasesContent from "./components/CRMUseCasesContent";
 import TermsAndConditionsContent from "./components/TermsAndConditionsContent";
 import CRMModulePage, { ModuleId, modulesData } from "./components/CRMModulePage";
+import TermsAndConditions from "./components/Term&condition";
+import policy from "./components/policy";
+import Policy from "./components/policy";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -53,6 +56,8 @@ export default function App() {
         return <CRMUseCasesContent />;
       case "terms":
         return <TermsAndConditionsContent />;
+        case "privacy":
+          return <Policy />
       case "home":
       default:
         return <HomeContent />;
@@ -66,6 +71,7 @@ export default function App() {
         {renderContent()}
       </main>
       <Footer onNavigate={setCurrentPage} />
+      
     </div>
   );
 }

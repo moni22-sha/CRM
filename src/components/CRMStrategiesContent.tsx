@@ -14,15 +14,15 @@ const STRATEGIES = [
 
 export default function CRMStrategiesContent() {
   return (
-    <div className="pt-32 pb-24 italic overflow-x-hidden">
+    <div className="pt-32 pb-24 italic overflow-x-hidden" style={{ background: "linear-gradient(135deg, #0a3fa8 0%, #1254c0 45%, #6d28d9 100%)" }}>
       <div className="max-w-7xl mx-auto px-4">
         <motion.div
            initial={{ opacity: 0 }}
            animate={{ opacity: 1 }}
         >
           <div className="mb-16 text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 font-display italic">8 Proven <span className="text-brand">CRM Practices</span></h1>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-display non-italic">8 Proven <span className="text-[#00c2ff]">CRM Practices</span></h1>
+            <p className="text-xl text-gray-100 leading-relaxed">
               A powerful CRM system brings all your customer data into one place. Follow these strategies to synchronize your business.
             </p>
           </div>
@@ -30,12 +30,12 @@ export default function CRMStrategiesContent() {
           {/* Tree Mind Map Section */}
           <div className="relative py-20">
             {/* The Trunk (Vertical Line) */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-slate-100 -translate-x-1/2 hidden md:block">
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-white/20 -translate-x-1/2 hidden md:block">
               <motion.div 
                 initial={{ height: 0 }}
                 whileInView={{ height: '100%' }}
                 viewport={{ once: true }}
-                className="w-full bg-brand origin-top"
+                className="w-full bg-#00c2ff origin-top"
               />
             </div>
 
@@ -50,11 +50,11 @@ export default function CRMStrategiesContent() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className={`flex-1 w-full md:w-auto ${i % 2 === 0 ? 'md:pl-24' : 'md:pr-24'} text-center ${i % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}
                   >
-                    <div className={`inline-flex items-center justify-center w-12 h-12 bg-slate-900 text-brand rounded-xl font-bold italic text-xl mb-4 shadow-lg`}>
+                    <div className={`inline-flex items-center justify-center w-12 h-12 bg-white text-slate-900 rounded-xl font-bold non-italic text-xl mb-4 shadow-lg`}>
                       {i + 1}
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 italic">{strat.title}</h3>
-                    <p className="text-slate-600 leading-relaxed italic max-w-sm mx-auto md:ml-0 md:mr-0 lg:max-w-md">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 non-italic">{strat.title}</h3>
+                    <p className="text-gray-100 leading-relaxed non-italic max-w-sm mx-auto md:ml-0 md:mr-0 lg:max-w-md">
                       {strat.desc}
                     </p>
                   </motion.div>
@@ -66,12 +66,12 @@ export default function CRMStrategiesContent() {
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
-                      className="w-16 h-16 bg-white border-4 border-brand rounded-full flex items-center justify-center text-brand shadow-xl relative"
+                      className="w-16 h-16 bg-white border-4 border-[#00c2ff] rounded-full flex items-center justify-center text-slate-900 shadow-xl relative"
                     >
                       <strat.icon className="w-8 h-8" />
                       {/* Branch line to content (Desktop) */}
-                      <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-brand/30 w-24 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
-                      <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-brand w-0 group-hover:w-24 transition-all duration-500 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-white/30 w-24 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 h-1 bg-[#00c2ff] w-0 group-hover:w-24 transition-all duration-500 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
                     </motion.div>
                   </div>
 
@@ -82,16 +82,16 @@ export default function CRMStrategiesContent() {
             </div>
           </div>
 
-          <div className="mt-24 bg-brand p-12 rounded-[3rem] text-white overflow-hidden relative">
+          <div className="mt-24 bg-white/10 p-12 rounded-[3rem] text-white overflow-hidden relative border border-white/10 backdrop-blur">
             <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 opacity-10">
               <TrendingUp className="w-64 h-64" />
             </div>
             <div className="relative z-10">
-              <h2 className="text-3xl font-bold mb-6 italic">Conclusion</h2>
-              <p className="text-xl text-white/80 mb-8 leading-relaxed italic max-w-2xl">
+              <h2 className="text-3xl font-bold mb-6 non-italic">Conclusion</h2>
+              <p className="text-xl text-gray-200 mb-8 leading-relaxed non-italic max-w-2xl">
                 By following these strategies, your business can unlock the full potential of your CRM system. A well-optimized CRM empowers your teams and improves efficiency.
               </p>
-              <div className="flex items-center gap-2 font-bold text-white cursor-pointer hover:gap-4 transition-all italic">
+              <div className="flex items-center gap-2 font-bold text-[#00c2ff] cursor-pointer hover:gap-4 transition-all non-italic hover:text-white">
                 Get Started with Your Strategy Now <ChevronRight />
               </div>
             </div>
