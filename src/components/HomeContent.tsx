@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, PlayCircle, CheckCircle2, Users, TrendingUp, BarChart3, Settings2, Zap, Cloud, Layers, Cpu, HelpCircle, Plus, Minus, MessageCircle,  } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, PlayCircle, CheckCircle2, Users, Heart,Package, Headphones,TrendingUp, BarChart3, Settings2, Zap, Cloud, Layers, Cpu, Plus, Minus, icons } from "lucide-react";
+import { Key, useState } from "react";
 import { Bot, X } from "lucide-react";
+import field from "../Image/Field.png";
 
 const DiscoverPoints = [
   "Who can benefit from a CRM system?",
@@ -26,14 +27,39 @@ const FAQS = [
   { k: "How do I implement a CRM system?", v: "Implementing a CRM involves identifying your business needs, selecting the right platform, customizing it to your processes, migrating data, and training your team. Proper planning and ongoing support are key to successful adoption." }
 ];
 
-function HomeCTA({ title, description }: { title: string, description?: string }) {
+const avatars = [
+  "https://i.pravatar.cc/32?img=1",
+  "https://i.pravatar.cc/32?img=2",
+  "https://i.pravatar.cc/32?img=3",
+  "https://i.pravatar.cc/32?img=4",
+];
+
+function StatCard({ icon, label, value, sub, accent }: { icon: React.ReactNode; label: string; value: string; sub: string; accent?: string }) {
   return (
-    <div className="bg-blue-700 border border-slate-100 rounded-[3rem] p-12 text-center my-16 bg-#00c2ff">
-      <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 non-italic">{title}</h3>
-      {description && <p className="text-text-white mb-8 max-w-2xl mx-auto non-italic">{description}</p>}
-      <div className="flex flex-col sm:flex-row justify-center gap-4 bg-#00c2ff">
-        <button className="px-8 py-4 bg-brand text-white font-bold rounded-xl shadow-lg shadow-brand/20">Start Free Trial</button>
-        <button className="px-8 py-4 bg-white text-brand font-bold rounded-xl border border-brand/20">Learn More</button>
+    <div className="bg-white rounded-2xl shadow-lg px-5 py-4 flex flex-col gap-1 min-w-[160px]">
+      <div className="flex items-center gap-2 text-slate-500 text-xs font-medium mb-1">
+        {icon}
+        {label}
+      </div>
+      <div className="text-2xl font-bold text-slate-900">{value}</div>
+      <div className={`text-xs font-semibold ${accent || "text-emerald-500"}`}>{sub}</div>
+    </div>
+  );
+}
+
+function HomeCTA({ title, description }: { title: string; description?: string }) {
+  return (
+    <div
+      className="rounded-[2.5rem] p-12 text-center my-16 relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #1a56db 0%, #1e40af 100%)" }}
+    >
+      <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full opacity-20" style={{ background: "#60a5fa" }} />
+      <div className="absolute -left-10 bottom-0 w-48 h-48 rounded-full opacity-10" style={{ background: "#bfdbfe" }} />
+      <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10">{title}</h3>
+      {description && <p className="text-blue-100 mb-8 max-w-2xl mx-auto relative z-10">{description}</p>}
+      <div className="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+        <button className="px-8 py-4 bg-white text-blue-700 font-bold rounded-xl shadow-lg hover:bg-blue-50 transition-colors">Start Free Trial</button>
+        <button className="px-8 py-4 bg-blue-800/40 text-white font-bold rounded-xl border border-white/20 hover:bg-blue-800/60 transition-colors">Learn More</button>
       </div>
     </div>
   );
@@ -41,89 +67,147 @@ function HomeCTA({ title, description }: { title: string, description?: string }
 
 export default function HomeContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-    const [isDemoOpen, setIsDemoOpen] = useState(false);
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+
+  function getImageURL(icon: any): string | undefined {
+    throw new Error("Function not implemented.");
+  }
 
   return (
-    <div className="non-italic">
+    <div style={{ fontFamily: "'DM Sans', 'Nunito', sans-serif", background: "#f8faff", color: "#0f172a" }}>
 
-      {/* 🚀 Hero Section - Bitrix24 Style */}
+      {/* Hero Section */}
       <section
-        className="pt-40 pb-24 overflow-hidden relative"
-        style={{ background: "linear-gradient(135deg, #0a3fa8 0%, #1254c0 45%, #6d28d9 100%)" }}
+        className="pt-36 pb-0 overflow-hidden relative min-h-[92vh] flex items-start"
+        style={{ background: "linear-gradient(160deg, #eef4ff 0%, #f0f6ff 50%, #e8f0fe 100%)" }}
       >
-        {/* Decorative blob — cyan left */}
-        <div
-          className="absolute -left-16 bottom-0 w-64 h-64 rounded-full opacity-60 pointer-events-none"
-          style={{ background: "#00c2ff" }}
-        />
-        {/* Decorative blob — purple right */}
-        <div
-          className="absolute right-0 top-0 w-80 h-80 rounded-full opacity-50 pointer-events-none"
-          style={{ background: "#a855f7", transform: "translate(35%, -35%)" }}
-        />
-        {/* Decorative blob — blue center-bottom */}
-        <div
-          className="absolute left-1/2 bottom-0 w-48 h-48 rounded-full opacity-20 pointer-events-none"
-          style={{ background: "#60a5fa", transform: "translate(-50%, 50%)" }}
-        />
+        <div className="absolute top-20 right-0 w-[520px] h-[520px] rounded-full opacity-30 pointer-events-none" style={{ background: "radial-gradient(circle, #bfdbfe, transparent 70%)" }} />
+        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-20 pointer-events-none" style={{ background: "radial-gradient(circle, #93c5fd, transparent 70%)" }} />
 
-        <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
+        <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center pb-0">
           <motion.div
             initial="hidden"
             animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-            }}
+            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } }}
+            className="relative z-10"
           >
-            <motion.h1
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-              }}
-              className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight non-italic"
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: -10 }, visible: { opacity: 1, y: 0 } }}
+              className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-8"
             >
-              Build Stronger Customer <br />Relationships. <span style={{ color: "#00c2ff" }}>Grow Faster.</span>
+              <span className="w-2 h-2 bg-blue-500 rounded-full inline-block" />
+              Trusted All-in-One CRM Platform
+            </motion.div>
+
+            <motion.h1
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+              className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6"
+              style={{ color: "#0f172a" }}
+            >
+              Welcome to the{" "}
+              <span style={{ color: "#1a56db" }}>Smart CRM.</span>
             </motion.h1>
 
             <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-              }}
-              className="max-w-3xl mx-auto text-xl mb-10 leading-relaxed non-italic"
-              style={{ color: "rgba(255,255,255,0.8)" }}
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+              className="text-lg text-slate-500 mb-8 leading-relaxed max-w-lg"
             >
-              Your all-in-one CRM platform to manage leads, automate sales, and deliver exceptional customer experiences — all from a single, powerful system.
+              Manage your leads, automate sales, and deliver exceptional customer experiences — all from a single powerful platform.
             </motion.p>
 
             <motion.div
-              variants={{
-                hidden: { opacity: 0, scale: 0.9 },
-                visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "backOut" } }
-              }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+              className="flex flex-wrap gap-4 mb-10"
             >
               <button
-                className="w-full sm:w-auto px-10 py-5 font-bold rounded-full shadow-2xl transition-all hover:-translate-y-1 active:scale-95 text-slate-900"
-                style={{ background: "linear-gradient(100deg, #00c2ff, #00c2ff)" }}
-              >
-                Get Started
-              </button>
-              <button
-                className="w-full sm:w-auto px-10 py-5 font-bold rounded-full transition-all flex items-center justify-center gap-2 text-white"
-                style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.3)" }}
+                className="flex items-center gap-2 px-7 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all"
                 onClick={() => setIsDemoOpen(true)}
               >
                 <PlayCircle className="w-5 h-5" />
-                Book a Demo
+                Request a Demo
               </button>
+              <button className="flex items-center gap-2 px-7 py-4 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 hover:border-blue-300 hover:text-blue-600 transition-all shadow-sm">
+                <ArrowRight className="w-5 h-5" />
+                Watch 2-min overview
+              </button>
+            </motion.div>
+
+            <motion.div
+              variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+              className="flex items-center gap-4"
+            >
+              <div className="flex -space-x-2">
+                {avatars.map((src, i) => (
+                  <img key={i} src={src} alt="" className="w-9 h-9 rounded-full border-2 border-white object-cover" />
+                ))}
+              </div>
+              <div>
+                <span className="font-bold text-slate-800">10,000+</span>
+                <span className="text-slate-500 text-sm"> sales leaders trust Smart CRM</span>
+                <div className="flex items-center gap-1 mt-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                  ))}
+                  <span className="text-xs text-slate-500 ml-1">4.9 / 5.0</span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right: Floating stat cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative hidden md:flex items-end justify-center h-[480px]"
+          >
+            
+             {/* Logo */}
+            
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
+              className="absolute top-8 left-0 z-10"
+            >
+              <StatCard
+                icon={<CheckCircle2 className="w-4 h-4 text-emerald-500" />}
+                label="Deals Closed Today"
+                value="94.2%"
+                sub="↑ 2.4% vs yesterday"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
+              className="absolute top-32 right-0 z-10 translate-x-4"
+            >
+              <StatCard
+                icon={<TrendingUp className="w-4 h-4 text-blue-500" />}
+                label="Revenue This Month"
+                value="₹48.2L"
+                sub="↑ On schedule"
+                accent="text-blue-500"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1 }}
+              className="absolute bottom-24 left-0 z-10"
+            >
+              <StatCard
+                icon={<Users className="w-4 h-4 text-violet-500" />}
+                label="Open Leads"
+                value="312"
+                sub="12 pending follow-up"
+                accent="text-violet-500"
+              />
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-6">
+
         {/* What is CRM? */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
@@ -131,186 +215,374 @@ export default function HomeContent() {
           viewport={{ once: true }}
           className="py-20 border-b border-slate-100"
         >
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 border-l-4 border-brand pl-6 non-italic">What is CRM?</h2>
-          <div className="space-y-6 text-lg text-slate-600 leading-relaxed non-italic mb-10">
+          <div className="inline-block bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">Overview</div>
+          <h2 className="text-3xl font-extrabold text-slate-900 mb-8 border-l-4 border-blue-600 pl-6">What is CRM?</h2>
+          <div className="space-y-5 text-lg text-slate-600 leading-relaxed mb-10">
             <p>• Customer Relationship Management (CRM) is a technology that helps businesses manage interactions with customers and prospects, improve relationships, and drive growth.</p>
             <p>• Our CRM empowers your team to stay connected, organized, and focused — so you can turn every interaction into an opportunity.</p>
           </div>
-          <div className="flex gap-6">
-            <button className="flex items-center gap-2 bg-brand/10 text-brand font-bold py-2 px-4 rounded-lg hover:bg-brand/20 hover:translate-x-1 transition-all">
+          <div className="flex gap-4 flex-wrap">
+            <button className="flex items-center gap-2 bg-blue-50 text-blue-600 font-bold py-3 px-5 rounded-xl hover:bg-blue-100 transition-all">
               <PlayCircle className="w-5 h-5" /> Watch Demo
             </button>
-            <button className="flex items-center gap-2 bg-brand text-white font-bold py-2 px-4 rounded-lg hover:bg-brand/90 hover:translate-x-1 transition-all">
+            <button className="flex items-center gap-2 bg-blue-600 text-white font-bold py-3 px-5 rounded-xl hover:bg-blue-700 transition-all shadow-md shadow-blue-100">
               Start Free Trial
             </button>
           </div>
         </motion.section>
 
         {/* Let's Understand CRM */}
+       {/* UNDERSTAND CRM SECTION */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="py-20"
-        >
-          <h2 className="text-4xl font-bold text-slate-900 mb-8 non-italic">Let's Understand CRM</h2>
-          <div className="space-y-6 text-lg text-slate-600 leading-relaxed non-italic">
-            <p>CRM stands for customer relationship management. It's a system that helps businesses manage interactions with current and potential customers. The goal is simple: improve relationships, streamline processes, and support business growth.</p>
-            <p>A CRM system helps you track every interaction with your customers — from sales conversations to support requests and marketing activities. It keeps all your data organized in one place so your team can stay informed and work more efficiently.</p>
-            <p>Modern CRM tools can also connect data from different sources and use smart features to help manage relationships across the entire customer journey — including sales, marketing, and customer support.</p>
-            <p className="font-bold text-slate-900">That's the basic idea of CRM. Now, let's look at why it matters and how it can help your business.</p>
-          </div>
-        </motion.section>
 
+          initial={{ opacity: 0, y: 30 }}
+
+          whileInView={{ opacity: 1, y: 0 }}
+
+          viewport={{ once: true }}
+
+          className="py-20"
+
+        >
+
+          <h2 className="text-4xl font-extrabold text-slate-900 mb-8">Let's Understand CRM</h2>
+
+          <div className="space-y-5 text-lg text-slate-600 leading-relaxed">
+
+            <p>CRM stands for customer relationship management. It's a system that helps businesses manage interactions with current and potential customers. The goal is simple: improve relationships, streamline processes, and support business growth.</p>
+
+            <p>A CRM system helps you track every interaction with your customers — from sales conversations to support requests and marketing activities. It keeps all your data organized in one place so your team can stay informed and work more efficiently.</p>
+
+            <p>Modern CRM tools can also connect data from different sources and use smart features to help manage relationships across the entire customer journey — including sales, marketing, and customer support.</p>
+
+            <p className="font-bold text-slate-800">That's the basic idea of CRM. Now, let's look at why it matters and how it can help your business.</p>
+
+          </div>
+
+        </motion.section>
         {/* What You'll Discover */}
         <motion.section
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="py-16 bg-slate-50/50 rounded-[2.5rem] p-10 border border-slate-100 mb-20"
+          className="py-14 bg-blue-50 rounded-[2.5rem] px-10 border border-blue-100 mb-20"
         >
-          <h2 className="text-2xl font-bold text-slate-900 mb-8 non-italic">What You'll Discover</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 mb-8">What You'll Discover</h2>
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
+            variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
             className="grid sm:grid-cols-2 gap-4"
           >
             {DiscoverPoints.map((point, i) => (
               <motion.div
                 key={i}
                 variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}
-                className="flex items-center gap-3 text-slate-700 font-medium"
+                className="flex items-center gap-3 text-slate-700 font-semibold"
               >
-                <div className="w-2 h-2 bg-brand rounded-full" />
+                <div className="w-2.5 h-2.5 bg-blue-500 rounded-full flex-shrink-0" />
                 {point}
               </motion.div>
             ))}
           </motion.div>
         </motion.section>
 
-        {/* 👥 Who can benefit */}
+        {/* Who can benefit */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="py-20"
         >
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-4 non-italic">
-            <Users className="w-8 h-8 text-brand" />
+          <h2 className="text-3xl font-extrabold text-slate-900 mb-8 flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+              <Users className="w-5 h-5 text-blue-600" />
+            </div>
             Who can benefit from a CRM system?
           </h2>
-          <div className="space-y-6 text-lg text-slate-600 leading-relaxed non-italic">
-            <p>CRM software is designed for businesses of all sizes and industries. It helps large organizations manage customer data across teams, while small businesses and startups can stay organized and work more efficiently with fewer resources. Whether you run a growing company or an established enterprise, a CRM helps you keep track of every customer interaction in one place.</p>
-            <p>Any business that connects with customers — including sales, marketing, support, or operations — can benefit from using a CRM system. It allows teams to share information, improve collaboration, and deliver better customer experiences. No matter your industry, a CRM helps you stay connected and make smarter decisions.</p>
+          <div className="space-y-5 text-lg text-slate-600 leading-relaxed">
+            <p>CRM software is designed for businesses of all sizes and industries. It helps large organizations manage customer data across teams, while small businesses and startups can stay organized and work more efficiently with fewer resources.</p>
+            <p>Any business that connects with customers — including sales, marketing, support, or operations — can benefit from using a CRM system. It allows teams to share information, improve collaboration, and deliver better customer experiences.</p>
           </div>
           <HomeCTA title="Work smarter with our CRM platform" description="Start quickly with tools to manage leads, track opportunities, and build stronger customer relationships — all in one place." />
         </motion.section>
 
-        {/* 📈 Why is CRM important for business growth? */}
-        <section className="py-20">
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-4 non-italic"
-          >
-            <TrendingUp className="w-8 h-8 text-brand" />
-            Why is CRM important for business growth?
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="space-y-6 text-lg text-slate-600 leading-relaxed non-italic mb-12"
-          >
-            <p>Running a business today is more complex than ever. Most companies rely on multiple tools and systems, but many of them don't work together. This makes it difficult to get a clear and accurate view of your customers and operations. To grow successfully, businesses need to focus on customers while using the right technology to support them.</p>
-          </motion.div>
+       {/* WHY CRM SECTION - THEBOT STYLE */}
+        <section className="relative py-24 max-w-7xl mx-auto px-6 overflow-hidden">
+          
+          {/* LARGE WATERMARK BACKGROUND */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full pointer-events-none select-none overflow-hidden h-full flex justify-center items-start opacity-[0.03]">
+             <span className="text-[300px] md:text-[500px] font-black text-slate-900 leading-none">
+                CRM
+             </span>
+          </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            className="space-y-6"
-          >
-            {[
-              { title: "A single, unified view of customers", icon: Layers, desc: "A CRM gives you one central place to store and access all customer information — including interactions, history, and preferences." },
-              { title: "Reduced costs and better efficiency", icon: BarChart3, desc: "A CRM keeps everything organized, reduces administrative work, and helps your team focus on activities that drive revenue." },
-              { title: "Better team collaboration", icon: Users, desc: "A CRM connects your sales, marketing, and support teams by giving them access to shared data. This improves communication and alignment." },
-              { title: "Increased productivity with smart tools", icon: Zap, desc: "Modern CRM systems include automation and intelligent features that speed up everyday tasks, from sending emails to generating insights." }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                className="flex gap-6 p-8 bg-white border border-slate-100 rounded-3xl shadow-sm hover:shadow-md transition-shadow"
+          <div className="relative z-10">
+            {/* THE CHALLENGE & SOLUTION HEADER */}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="h-[1px] w-12 bg-blue-600/30" />
+              <span className="text-blue-600 font-bold tracking-widest text-sm uppercase">
+                The Impact of Strategy
+              </span>
+              <div className="h-[1px] w-12 bg-blue-600/30" />
+            </div>
+
+            {/* MAIN TITLE WITH SIGNATURE UNDERLINE */}
+            <div className="text-center mb-20">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-6"
               >
-                <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-brand flex-shrink-0">
-                  <item.icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-slate-900 mb-2 non-italic">{item.title}</h4>
-                  <p className="text-slate-600 non-italic">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-          <HomeCTA title="Start growing your business with the right CRM" description="Simplify your processes, connect your teams, and turn customer data into real results — all in one powerful platform." />
+                Why CRM matters for <br />
+                <span className="relative inline-block text-blue-600">
+                  sustainable growth
+                  <motion.svg 
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="absolute -bottom-2 left-0 w-full h-3 text-blue-400/50" 
+                    viewBox="0 0 300 12" 
+                    fill="none" 
+                    preserveAspectRatio="none"
+                  >
+                    <path d="M1 9.5C50.5 4.5 150.5 1.5 299 9.5" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                  </motion.svg>
+                </span>
+              </motion.h2>
+              <p className="text-slate-500 text-xl max-w-2xl mx-auto leading-relaxed">
+                Running a business is complex. Most teams struggle with fragmented tools that don't talk to each other. We provide the unified ecosystem you need to scale.
+              </p>
+            </div>
+
+            {/* IMPACT GRID (HRMS CARD STYLE) */}
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.15 }
+                }
+              }}
+              className="grid md:grid-cols-2 gap-6 lg:gap-8"
+            >
+              {[
+                { 
+                  title: "A single, unified view", 
+                  icon: Layers, 
+                  desc: "Store and access all customer history, interactions, and preferences in one central ecosystem.", 
+                  num: "01",
+                  color: "text-blue-600",
+                  bg: "bg-blue-50"
+                },
+                { 
+                  title: "Reduced costs & efficiency", 
+                  icon: BarChart3, 
+                  desc: "Eliminate administrative bottlenecks and refocus your team on revenue-driving activities.", 
+                  num: "02",
+                  color: "text-purple-600",
+                  bg: "bg-purple-50"
+                },
+                { 
+                  title: "Seamless team alignment", 
+                  icon: Users, 
+                  desc: "Connect sales, marketing, and support through shared data for a consistent customer journey.", 
+                  num: "03",
+                  color: "text-emerald-600",
+                  bg: "bg-emerald-50"
+                },
+                { 
+                  title: "Intelligent automation", 
+                  icon: Zap, 
+                  desc: "Leverage smart features to speed up follow-ups and generate real-time business insights.", 
+                  num: "04",
+                  color: "text-amber-600",
+                  bg: "bg-amber-50"
+                }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    show: { opacity: 1, y: 0, transition: { type: "spring", duration: 0.8 } }
+                  }}
+                  whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.04)" }}
+                  className="group relative flex flex-col p-10 bg-white border border-slate-100 rounded-[40px] transition-all"
+                >
+                  <div className="flex justify-between items-start mb-8">
+                    <div className={`w-14 h-14 rounded-2xl ${item.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <item.icon className={`w-7 h-7 ${item.color}`} />
+                    </div>
+                    <span className="text-slate-100 font-black text-4xl group-hover:text-blue-50 transition-colors">
+                      {item.num}
+                    </span>
+                  </div>
+                  
+                  <h4 className="text-2xl font-bold text-slate-900 mb-4">{item.title}</h4>
+                  <p className="text-slate-500 text-lg leading-relaxed">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <div className="mt-20">
+              <HomeCTA 
+                title="Start growing with the right CRM" 
+                description="Simplify processes, connect your teams, and turn data into results." 
+              />
+            </div>
+          </div>
         </section>
 
-        {/* ⭐ Key benefits */}
-        <section className="py-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-slate-900 mb-12 flex items-center gap-4 non-italic"
-          >
-            <CheckCircle2 className="w-8 h-8 text-brand" />
-            What are the key benefits of using CRM?
-          </motion.h2>
+      {/* KEY BENEFITS SECTION */}
+        
+          {/* BENEFITS GRID */}
+         {/* KEY BENEFITS SECTION WITH ANIMATION */}
+        <section className="py-24 max-w-7xl mx-auto px-6 overflow-hidden">
+          {/* HEADER SECTION */}
+          <div className="mb-16">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 mb-4"
+            >
+              <div className="h-[1px] w-8 bg-blue-600" />
+              <span className="text-blue-600 font-bold tracking-widest text-xs uppercase">
+                Core Advantages
+              </span>
+            </motion.div>
+            
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-4xl md:text-5xl font-black text-slate-900 leading-tight"
+              >
+                Everything you need to <br />
+                <span className="relative inline-block text-blue-600">
+                  manage growth effortlessly
+                  <motion.svg 
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="absolute -bottom-2 left-0 w-full h-2 text-blue-400/60" 
+                    viewBox="0 0 300 12" 
+                    fill="none" 
+                    preserveAspectRatio="none"
+                  >
+                    <path d="M1 9.5C50.5 4.5 150.5 1.5 299 9.5" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                  </motion.svg>
+                </span>
+              </motion.h2>
+
+              {/* Animated Branding Circles */}
+              <div className="flex -space-x-3 mb-2">
+                {[
+                  { color: "bg-blue-500", delay: 0.1 },
+                  { color: "bg-purple-500", delay: 0.2 },
+                  { color: "bg-cyan-500", delay: 0.3 },
+                  { color: "bg-emerald-500", delay: 0.4 }
+                ].map((dot, i) => (
+                  <motion.div 
+                    key={i}
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: dot.delay, type: "spring", stiffness: 260, damping: 20 }}
+                    className={`w-8 h-8 rounded-full border-2 border-white ${dot.color}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* BENEFITS GRID WITH STAGGERED CHILDREN */}
           <motion.div
             initial="hidden"
-            whileInView="visible"
+            whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-            className="space-y-4"
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15,
+                  delayChildren: 0.3
+                }
+              }
+            }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {[
-              { t: "1. Breaking down team silos", d: "A CRM makes it easy to share information across departments. Everyone can access real-time customer data from a single platform." },
-              { t: "2. Driving better business results", d: "CRM systems help teams work more efficiently, reduce manual effort, and uncover new opportunities." },
-              { t: "3. Smarter insights with advanced technology", d: "Intelligent features help identify patterns and trends, allowing businesses to predict needs and personalize interactions." },
-              { t: "4. Faster work with automation", d: "Automation tools within a CRM simplify repetitive tasks like managing leads and follow-ups, saving valuable time." },
-              { t: "5. Stronger customer relationships", d: "Identify opportunities for cross-selling and upselling through better engagement and customer journey tracking." },
-              { t: "6. Improved customer support", d: "Support teams respond quickly with full context of customer histories, ensuring more personalized service." },
-              { t: "7. Better products and services", d: "Insights into behavior and feedback help identify gaps and make informed decisions to improve your offerings." }
+              { t: "Breaking down team silos", d: "Everyone can access real-time customer data from a single platform, ensuring departmental harmony.", n: "01", icon: <Users className="w-5 h-5 text-blue-600" /> },
+              { t: "Better business results", d: "Reduce manual effort and uncover new opportunities with unified workflows.", n: "02", icon: <TrendingUp className="w-5 h-5 text-emerald-600" /> },
+              { t: "Smarter insights", d: "Identify patterns and trends to predict needs and personalize interactions.", n: "03", icon: <BarChart3 className="w-5 h-5 text-purple-600" /> },
+              { t: "Faster work with automation", d: "Simplify repetitive tasks like managing leads and follow-ups to save valuable time.", n: "04", icon: <Zap className="w-5 h-5 text-amber-500" /> },
+              { t: "Stronger relationships", d: "Identify cross-selling and upselling opportunities through journey tracking.", n: "05", icon: <Heart className="w-5 h-5 text-rose-500" /> },
+              { t: "Improved customer support", d: "Support teams respond quickly with full context of customer histories.", n: "06", icon: <Headphones className="w-5 h-5 text-cyan-600" /> },
+              { t: "7. Better products and services", d: "Insights into behavior and feedback help identify gaps and make informed decisions to improve your offerings.", n: "07", icon: <Package className="w-5 h-5 text-emerald-600" /> }
             ].map((benefit, i) => (
               <motion.div
                 key={i}
-                variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}
-                className="p-8 bg-slate-50 border border-slate-100 rounded-[2rem] non-italic"
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.95 },
+                  show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", duration: 0.8 } }
+                }}
+                whileHover={{ 
+                  y: -10, 
+                  boxShadow: "0 20px 40px rgba(37, 99, 235, 0.08)",
+                  transition: { duration: 0.3 }
+                }}
+                className="group p-8 bg-white border border-slate-100 rounded-[32px] cursor-default"
               >
-                <h4 className="text-xl font-bold text-slate-900 mb-2 non-italic">{benefit.t}</h4>
-                <p className="text-slate-600 non-italic">{benefit.d}</p>
+                <div className="flex justify-between items-start mb-6">
+                  <motion.div 
+                    whileHover={{ rotate: 15 }}
+                    className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-blue-50 transition-colors"
+                  >
+                    {benefit.icon}
+                  </motion.div>
+                  <span className="text-slate-200 font-black text-2xl group-hover:text-blue-100 transition-colors">
+                    {benefit.n}
+                  </span>
+                </div>
+                
+                <h4 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  {benefit.t}
+                </h4>
+                <p className="text-slate-500 leading-relaxed">
+                  {benefit.d}
+                </p>
               </motion.div>
             ))}
           </motion.div>
-          <HomeCTA title="Unlock the full potential of your business with CRM" description="Connect your teams, streamline your work, and deliver better customer experiences — all from one powerful platform." />
         </section>
 
-        {/* ⚙️ Features and functions */}
+        {/* Features */}
         <section className="py-20">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-4 non-italic"
+            className="text-3xl font-extrabold text-slate-900 mb-6 flex items-center gap-4"
           >
-            <Settings2 className="w-8 h-8 text-brand" />
+            <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center">
+              <Settings2 className="w-5 h-5 text-slate-600" />
+            </div>
             What features and functions does a CRM offer?
           </motion.h2>
-          <p className="text-lg text-slate-600 leading-relaxed non-italic mb-12">
+          <p className="text-lg text-slate-600 leading-relaxed mb-12">
             A CRM system helps you manage customer relationships by storing contact details, tracking interactions, identifying opportunities, and organizing sales, service, and marketing activities — all in one place.
           </p>
           <motion.div
@@ -321,78 +593,81 @@ export default function HomeContent() {
             className="grid md:grid-cols-2 gap-6 mb-12"
           >
             {[
-              { t: "Cloud-based access and flexibility", icon: Cloud, d: "Securely access data anytime, from anywhere. Cloud solutions are cost-effective and scalable." },
-              { t: "Complete customer view", icon: Users, d: "A full picture of every customer and prospect for marketing, sales, and support teams." },
-              { id: "integration", t: "Integration with other tools", icon: Layers, d: "Connect with billing, communication, and document apps for smooth data flow." },
-              { t: "Built-in intelligence and automation", icon: Cpu, d: "Automate routine tasks like data entry and lead assignment while gaining smart insights." }
+              { t: "Cloud-based access and flexibility", icon: Cloud, d: "Securely access data anytime, from anywhere. Cloud solutions are cost-effective and scalable.", color: "bg-sky-50 text-sky-600" },
+              { t: "Complete customer view", icon: Users, d: "A full picture of every customer and prospect for marketing, sales, and support teams.", color: "bg-blue-50 text-blue-600" },
+              { t: "Integration with other tools", icon: Layers, d: "Connect with billing, communication, and document apps for smooth data flow.", color: "bg-violet-50 text-violet-600" },
+              { t: "Built-in intelligence and automation", icon: Cpu, d: "Automate routine tasks like data entry and lead assignment while gaining smart insights.", color: "bg-emerald-50 text-emerald-600" }
             ].map((f, i) => (
               <motion.div
                 key={i}
-                variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
-                className="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm non-italic hover:border-brand/20 transition-colors"
+                variants={{ hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1 } }}
+                className="p-7 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md hover:border-blue-100 transition-all"
               >
-                <f.icon className="w-6 h-6 text-brand mb-4" />
-                <h4 className="font-bold text-slate-900 mb-2 non-italic">{f.t}</h4>
-                <p className="text-sm text-slate-500 non-italic">{f.d}</p>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${f.color}`}>
+                  <f.icon className="w-5 h-5" />
+                </div>
+                <h4 className="font-bold text-slate-900 mb-2">{f.t}</h4>
+                <p className="text-sm text-slate-500">{f.d}</p>
               </motion.div>
             ))}
           </motion.div>
           <HomeCTA title="Simplify your business with powerful CRM features" description="Manage customers, streamline workflows, and unlock better insights — all from one intelligent platform." />
         </section>
 
-        {/* 💰 Pricing */}
+        {/* Pricing */}
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="py-20 border-t border-slate-100 mb-20 text-center"
         >
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 non-italic">How much does a CRM system typically cost?</h2>
-          <p className="text-lg text-slate-600 leading-relaxed non-italic max-w-3xl mx-auto mb-10">
-            A CRM system can deliver significant value without requiring a large upfront investment. Pricing varies based on size, features, and customization. Most solutions offer flexible plans that scale as your business grows, allowing you to start simple and expand over time.
+          <div className="inline-block bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">Pricing</div>
+          <h2 className="text-3xl font-extrabold text-slate-900 mb-6">How much does a CRM system typically cost?</h2>
+          <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10">
+            A CRM system can deliver significant value without requiring a large upfront investment. Pricing varies based on size, features, and customization. Most solutions offer flexible plans that scale as your business grows.
           </p>
-          <button className="px-10 py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-xl active:scale-95 transition-all non-italic hover:bg-slate-800">View Pricing Plans</button>
+          <button className="px-10 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-100 hover:bg-blue-700 active:scale-95 transition-all">
+            View Pricing Plans
+          </button>
         </motion.section>
 
-        {/* ❓ FAQs */}
+        {/* FAQs */}
         <section className="py-20 mb-20">
           <motion.h2
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold text-slate-900 mb-12 text-center non-italic"
+            className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-12 text-center"
           >
-            Frequently Asked <span className="text-brand">Questions (FAQs)</span>
+            Frequently Asked{" "}
+            <span style={{ color: "#1a56db" }}>Questions (FAQs)</span>
           </motion.h2>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {FAQS.map((faq, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: i * 0.05 }}
-                className="border border-slate-100 rounded-[2rem] overflow-hidden"
+                transition={{ delay: i * 0.04 }}
+                className="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full px-8 py-6 text-left flex justify-between items-center gap-4 hover:bg-slate-50 transition-colors"
+                  className="w-full px-8 py-5 text-left flex justify-between items-center gap-4 hover:bg-blue-50/50 transition-colors"
                 >
-                  <span className="font-bold text-slate-800 non-italic leading-tight">{faq.k}</span>
-                  <motion.div
-                    animate={{ rotate: openFaq === i ? 180 : 0 }}
-                    className="flex-shrink-0 w-8 h-8 rounded-full bg-white border border-slate-100 flex items-center justify-center text-brand"
-                  >
+                  <span className="font-bold text-slate-800 leading-tight">{faq.k}</span>
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${openFaq === i ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-500"}`}>
                     {openFaq === i ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                  </motion.div>
+                  </div>
                 </button>
                 <AnimatePresence>
                   {openFaq === i && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
+                      animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="px-8 pb-8 text-slate-600 non-italic leading-relaxed"
+                      className="px-8 pb-7 text-slate-600 leading-relaxed border-t border-slate-50 pt-4"
                     >
                       {faq.v}
                     </motion.div>
@@ -403,128 +678,80 @@ export default function HomeContent() {
           </div>
         </section>
       </div>
-        {/* 🤖 Floating Chat Bot */}
-        {/* FLOATING BOT ICON */}
-<div className="fixed bottom-6 right-6 z-50">
 
-  {/* BOT BUTTON */}
-  <button
-    onClick={() => setIsDemoOpen(true)}
-    className="
-      group
-      w-16
-      h-16
-      rounded-full
-      bg-gradient-to-br
-      from-violet-500
-      to-purple-600
-      shadow-[0_10px_40px_rgba(139,92,246,0.45)]
-      flex
-      items-center
-      justify-center
-      hover:scale-110
-      active:scale-95
-      transition-all
-      duration-300
-      relative
-    "
-  >
-
-    {/* Glow */}
-    <div className="absolute inset-0 rounded-full bg-violet-400 blur-2xl opacity-40 group-hover:opacity-60 transition-opacity" />
-
-    {/* Icon */}
-    <Bot className="relative z-10 w-8 h-8 text-white" />
-  </button>
-</div>
-
-{/* POPUP FORM */}
-<AnimatePresence>
-  {isDemoOpen && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-end md:items-center justify-center p-4"
-    >
-
-      {/* MODAL */}
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 20, scale: 0.95 }}
-        transition={{ duration: 0.25 }}
-        className="w-full max-w-md bg-white rounded-[2rem] shadow-2xl p-8 relative"
-      >
-
-        {/* CLOSE BUTTON */}
+      {/* Floating Bot */}
+      <div className="fixed bottom-6 right-6 z-50">
         <button
-          onClick={() => setIsDemoOpen(false)}
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors"
+          onClick={() => setIsDemoOpen(true)}
+          className="group w-16 h-16 rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 relative shadow-xl shadow-blue-200"
+          style={{ background: "linear-gradient(135deg, #1a56db, #1e40af)" }}
         >
-          <X className="w-5 h-5 text-slate-700" />
+          <div className="absolute inset-0 rounded-full bg-blue-400 blur-2xl opacity-30 group-hover:opacity-50 transition-opacity" />
+          <Bot className="relative z-10 w-8 h-8 text-white" />
         </button>
+      </div>
 
-        {/* TITLE */}
-        <h3 className="text-3xl font-bold text-slate-900 mb-2">
-          Book a Demo
-        </h3>
-
-        <p className="text-slate-500 mb-6 leading-relaxed">
-          Fill out the form and our team will contact you shortly.
-        </p>
-
-        {/* FORM */}
-        <form className="space-y-4">
-
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-violet-500"
-          />
-
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-violet-500"
-          />
-
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-violet-500"
-          />
-
-          <textarea
-            placeholder="Tell us about your business..."
-            rows={4}
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-violet-500 resize-none"
-          />
-
-          <button
-            type="submit"
-            className="
-              w-full
-              bg-gradient-to-r
-              from-violet-500
-              to-purple-600
-              text-white
-              py-4
-              rounded-xl
-              font-bold
-              hover:opacity-90
-              transition-all
-            "
+      {/* Demo Modal */}
+      <AnimatePresence>
+        {isDemoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] flex items-end md:items-center justify-center p-4"
           >
-            Book Demo
-          </button>
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.96 }}
+              transition={{ duration: 0.25 }}
+              className="w-full max-w-md bg-white rounded-[2rem] shadow-2xl p-8 relative"
+            >
+              <button
+                onClick={() => setIsDemoOpen(false)}
+                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors"
+              >
+                <X className="w-5 h-5 text-slate-700" />
+              </button>
 
-        </form>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-     </div>
-     
+              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
+                <PlayCircle className="w-6 h-6 text-blue-600" />
+              </div>
+
+              <h3 className="text-2xl font-extrabold text-slate-900 mb-2">Book a Demo</h3>
+              <p className="text-slate-500 mb-6 leading-relaxed">Fill out the form and our team will contact you shortly.</p>
+
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-800"
+                />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-800"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-800"
+                />
+                <textarea
+                  placeholder="Tell us about your business..."
+                  rows={4}
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all resize-none text-slate-800"
+                />
+                <button
+                  className="w-full bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 active:scale-95 transition-all shadow-lg shadow-blue-100"
+                >
+                  Book Demo
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

@@ -11,7 +11,6 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import FeatureCards from "./components/Cards";
-import Features from "./components/Features";
 import FAQ from "./components/FAQ";
 import { FeaturedCTA, FinalCTA, Footer } from "./components/CTASection";
 
@@ -29,6 +28,7 @@ import CRMModulePage, { ModuleId, modulesData } from "./components/CRMModulePage
 import TermsAndConditions from "./components/Term&condition";
 import policy from "./components/policy";
 import Policy from "./components/policy";
+import Features from "./components/Features";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -54,6 +54,8 @@ export default function App() {
         return <CRMAdvantagesContent />;
       case "use-cases":
         return <CRMUseCasesContent />;
+        case "features":
+          return <Features />;
       case "terms":
         return <TermsAndConditionsContent />;
         case "privacy":
