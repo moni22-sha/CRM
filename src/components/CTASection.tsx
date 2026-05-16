@@ -2,10 +2,10 @@ import { motion } from "motion/react";
 import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
 
 export function FeaturedCTA() {
-  return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto px-4">
-        <motion.div
+ return (
+ <section className="py-24">
+<div className="max-w-7xl mx-auto px-4">
+ <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}

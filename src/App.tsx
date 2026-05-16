@@ -29,6 +29,7 @@ import TermsAndConditions from "./components/Term&condition";
 import policy from "./components/policy";
 import Policy from "./components/policy";
 import Features from "./components/Features";
+import BookDemo from "./components/calendly"
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -60,6 +61,8 @@ export default function App() {
         return <TermsAndConditionsContent />;
         case "privacy":
           return <Policy />
+          case "calendly":
+            return <BookDemo />;
       case "home":
       default:
         return <HomeContent />;
