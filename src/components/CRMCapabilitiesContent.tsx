@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   Users, Database, Cpu, Layout, Cloud, Smartphone, Zap,
   Share2, Settings, LineChart, Target, FileText, MessageCircle,
@@ -27,85 +27,167 @@ const capabilities = [
   { icon: ShieldAlert, title: "Data Security", desc: "Protect information with encryption and role-based access.", n: "19", color: "text-red-500", bg: "bg-red-50" }
 ];
 
+// --- Animation Configurations ---
+const cardAnimationVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: { type: "spring", stiffness: 90, damping: 15 }
+  }
+};
+
+const gridContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.04 }
+  }
+};
+
+const underlineVariants: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: { 
+    pathLength: 1, 
+    opacity: 1,
+    transition: { delay: 0.8, duration: 0.8, ease: "easeInOut" }
+  }
+};
+
 export default function CRMCapabilitiesContent() {
   return (
     <div className="bg-white font-sans selection:bg-blue-100 selection:text-blue-600 overflow-x-hidden">
       
       {/* --- HERO SECTION --- */}
       <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-slate-50/50">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-blue-600/5 blur-[120px] rounded-full -translate-y-1/2" />
+        {/* Animated fluid background glow */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.15, 1],
+            x: ["-50%", "-48%", "-50%"],
+            y: ["-50%", "-52%", "-50%"]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 left-1/2 w-full h-full bg-blue-600/5 blur-[120px] rounded-full" 
+        />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col items-center text-center max-w-4xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-widest mb-8">
-              <Sparkles className="w-3 h-3" />
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+            {/* Centered Badge with rotating engine sparkle */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-widest mb-8 cursor-default"
+            >
+              <Sparkles className="w-3 h-3 animate-spin" style={{ animationDuration: '3s' }} />
               Comprehensive Toolkit
-            </div>
+            </motion.div>
 
-            <h1 className="text-6xl md:text-8xl font-black text-slate-900 leading-[1.05] mb-8 tracking-tight">
+            {/* Centered Heading with Dynamic SVG Underline Draw-in */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-6xl md:text-8xl font-black text-slate-900 leading-[1.05] mb-8 tracking-tight"
+            >
               19 Essential <br/>
-              <span className="relative inline-block text-blue-600">
+              <span className="relative inline-block text-blue-600 pb-3">
                 CRM Features
-               
-                  <path d="M1 9.5C50.5 4.5 150.5 1.5 299 9.5" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-                
+                <svg className="absolute left-0 bottom-0 w-full h-3 text-blue-500" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <motion.path 
+                    variants={underlineVariants}
+                    initial="hidden"
+                    animate="visible"
+                    d="M1 9.5C50.5 4.5 150.5 1.5 299 9.5" 
+                    stroke="currentColor" 
+                    strokeWidth="4" 
+                    strokeLinecap="round" 
+                  />
+                </svg>
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl text-slate-500 leading-relaxed mb-12 max-w-2xl font-medium">
+            {/* Centered Description */}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-xl text-slate-500 leading-relaxed mb-12 max-w-2xl font-medium"
+            >
               The right platform reshapes how your business operates. By bringing together data, automation, and insights, our tools help teams work smarter, not harder.
-            </p>
+            </motion.p>
 
-            <div className="flex justify-center gap-4">
-              <button className="px-10 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all">
+            {/* Interactive Call to Action Deck */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="flex justify-center gap-4"
+            >
+              <motion.button 
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-10 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-colors"
+              >
                 Learn More
-              </button>
-              <button className="px-10 py-5 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 hover:border-blue-600 transition-all">
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.04, y: -2, backgroundColor: "#f8fafc" }}
+                whileTap={{ scale: 0.98 }}
+                className="px-10 py-5 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 transition-all"
+              >
                 Get Started Free
-              </button>
-            </div>
-          </motion.div>
+              </motion.button>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* --- CAPABILITIES GRID --- */}
       <section className="relative py-24 overflow-hidden">
         {/* Large Watermark Background */}
-        <div className="absolute top-40 left-1/2 -translate-x-1/2 opacity-[0.02] select-none pointer-events-none">
+        <div className="absolute top-40 left-1/2 -translate-x-1/2 opacity-[0.015] select-none pointer-events-none">
           <span className="text-[300px] font-black text-slate-900 leading-none">CRM</span>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
+          {/* Staggered Scroll Orchestration */}
           <motion.div 
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: { opacity: 0 },
-              show: { opacity: 1, transition: { staggerChildren: 0.03 } }
-            }}
+            viewport={{ once: true, margin: "-80px" }}
+            variants={gridContainerVariants}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
           >
             {capabilities.map((cap, i) => (
               <motion.div
                 key={i}
-                variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-                whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.04)", borderColor: "#2563eb" }}
-                className="group relative flex flex-col p-8 bg-white border border-slate-100 rounded-[32px] transition-all"
+                variants={cardAnimationVariants}
+                whileHover={{ 
+                  y: -8, 
+                  boxShadow: "0 20px 40px rgba(37, 99, 235, 0.04)", 
+                  borderColor: "rgba(37, 99, 235, 0.25)" 
+                }}
+                whileTap={{ 
+                  scale: 0.97,
+                  borderColor: "rgba(37, 99, 235, 0.5)",
+                  backgroundColor: "rgba(248, 250, 252, 0.95)",
+                  boxShadow: "0 4px 12px rgba(37, 99, 235, 0.08)"
+                }}
+                className="group relative flex flex-col p-8 bg-white border border-slate-100 rounded-[32px] transition-all duration-200 cursor-pointer select-none"
               >
                 <div className="flex justify-between items-start mb-6">
-                  <div className={`w-14 h-14 rounded-2xl ${cap.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                  {/* Dynamic Scaling Icon Wrapper */}
+                  <div className={`w-14 h-14 rounded-2xl ${cap.bg} flex items-center justify-center group-hover:scale-110 group-active:scale-95 transition-transform duration-300`}>
                     <cap.icon className={`w-7 h-7 ${cap.color}`} />
                   </div>
-                  <span className="text-sm font-black text-slate-100 group-hover:text-blue-50 transition-colors">
+                  <span className="text-sm font-black text-slate-200 group-hover:text-blue-200 group-active:text-blue-300 transition-colors duration-300">
                     {cap.n}
                   </span>
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+                <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
                   {cap.title}
                 </h4>
                 <p className="text-slate-500 leading-relaxed font-medium text-sm">
@@ -120,10 +202,17 @@ export default function CRMCapabilitiesContent() {
       {/* --- SELECTION GUIDE CARD --- */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <motion.div 
-          whileHover={{ scale: 1.005 }}
-          className="bg-slate-900 rounded-[48px] p-12 md:p-20 text-white relative overflow-hidden"
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 60 }}
+          whileHover={{ y: -4 }}
+          className="bg-slate-900 rounded-[48px] p-12 md:p-20 text-white relative overflow-hidden shadow-2xl"
         >
-          <div className="absolute -top-24 -right-24 opacity-5 pointer-events-none">
+          {/* Subtle overlay shading */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent pointer-events-none" />
+          
+          <div className="absolute -top-24 -right-24 opacity-5 pointer-events-none animate-spin" style={{ animationDuration: '40s' }}>
             <Settings className="w-96 h-96" />
           </div>
           
@@ -135,9 +224,13 @@ export default function CRMCapabilitiesContent() {
             <p className="text-xl text-slate-400 leading-relaxed mb-10 font-medium">
               Selecting the right CRM starts with understanding your business goals. Focus on features that align with your current workflows while supporting future scalability.
             </p>
-            <button className="px-12 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all flex items-center gap-2 group">
+            <motion.button 
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-12 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-colors flex items-center gap-2 group"
+            >
               Talk to an Expert <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </motion.button>
           </div>
         </motion.div>
       </section>
@@ -145,7 +238,7 @@ export default function CRMCapabilitiesContent() {
       {/* --- FOOTER SPACING --- */}
       <div className="py-20 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-6 text-center">
-            <p className="text-slate-400 font-medium italic tracking-wide">"Precision features for powerful growth."</p>
+          <p className="text-slate-400 font-medium italic tracking-wide">"Precision features for powerful growth."</p>
         </div>
       </div>
     </div>

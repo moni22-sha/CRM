@@ -281,75 +281,50 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
       className="fixed bottom-6 right-6 z-50 bg-white w-[280px] rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.12)] border border-slate-100 p-4 font-sans"
     >
       {/* Header section */}
-      <div className="flex justify-between items-start mb-0.5">
-        <h3 className="text-base font-extrabold text-[#0B1A30] tracking-tight leading-snug">
-          See Bot CRM in Action
-        </h3>
-        <button 
-          onClick={() => setShowDemoPopup(false)}
-          className="text-slate-400 hover:text-slate-600 p-0.5 rounded-full hover:bg-slate-50 transition-colors"
-        >
-          <X className="w-3.5 h-3.5" />
-        </button>
-      </div>
-      
-      <p className="text-[11px] text-slate-500 font-normal mb-3">
-        Get a personalized demo in 20 minutes
-      </p>
+      <div className="flex justify-between items-start mb-1">
+  <h3 className="text-xs font-extrabold text-[#0B1A30] tracking-tight leading-none">
+    See Bot CRM in Action
+  </h3>
+  <button 
+    onClick={() => setShowDemoPopup(false)}
+    className="text-slate-400 hover:text-slate-600 p-0 rounded-full hover:bg-slate-50 transition-colors"
+  >
+    <X className="w-3 h-3" />
+  </button>
+</div>
 
-      {/* CRM Discussion Illustration Area */}
-      <div className="w-full flex justify-center items-center py-1.5 mb-4 bg-slate-50/50 rounded-xl">
-        <svg className="w-32 h-24" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {/* Desk/Table */}
-          <path d="M30 100H170V103H30V100Z" fill="#E2E8F0"/>
-          <path d="M45 103L40 138H44L49 103H45Z" fill="#CBD5E1"/>
-          <path d="M155 103L160 138H156L151 103H155Z" fill="#CBD5E1"/>
-          
-          {/* Left Figure (Girl presenting/explaining) */}
-          {/* Chair back */}
-          <path d="M36 78L26 78L24 110L34 110Z" fill="#CBD5E1" opacity="0.5" />
-          {/* Body & Clothes */}
-          <path d="M56 76C56 70 46 68 46 76V100H56V76Z" fill="#0E9F6E"/> {/* Teal/Green Outfit */}
-          <circle cx="51" cy="61" r="6" fill="#FDBA74"/> {/* Skin tone */}
-          {/* Hair */}
-          <path d="M44 58C44 52 56 52 57 57C58 62 55 66 53 66C51 66 44 64 44 58Z" fill="#475569"/>
-          {/* Arm pointing to laptop */}
-          <path d="M52 78L68 84L71 80L54 74V78Z" fill="#0E9F6E"/>
-          
-          {/* Laptop showing CRM Analytics Data */}
-          <path d="M82 100H118L114 74H86L82 100Z" fill="#475569"/>
-          <rect x="88" y="77" width="24" height="16" rx="1" fill="#FFFFFF"/>
-          {/* CRM UI Elements inside screen (Bars and Lines) */}
-          <rect x="91" y="80" width="5" height="10" fill="#3B82F6"/> {/* Bar Chart 1 */}
-          <rect x="98" y="83" width="5" height="7" fill="#10B981"/>  {/* Bar Chart 2 */}
-          <rect x="105" y="85" width="5" height="5" fill="#F59E0B"/>  {/* Bar Chart 3 */}
-          <path d="M91 92.5H109" stroke="#E2E8F0" strokeWidth="1"/>
-          
-          {/* Right Figure (Boy reviewing/listening) */}
-          {/* Chair back */}
-          <path d="M164 78L174 78L176 110L166 110Z" fill="#CBD5E1" opacity="0.5" />
-          {/* Body & Clothes */}
-          <path d="M144 76C144 70 154 68 154 76V100H144V76Z" fill="#3B82F6"/> {/* Blue Shirt */}
-          <circle cx="149" cy="61" r="6" fill="#FED7AA"/> {/* Skin tone */}
-          {/* Hair */}
-          <path d="M143 59C143 54 153 53 154 57C155 60 153 63 148 63C145 63 143 61 143 59Z" fill="#78350F"/>
-          {/* Arm resting on desk */}
-          <path d="M146 78L132 86L134 90L148 82V78Z" fill="#3B82F6"/>
+<p className="text-[10px] text-slate-500 font-normal mb-2 leading-tight">
+  Get a personalized demo in 20 minutes
+</p>
 
-          {/* Plant on Desk */}
-          <rect x="122" y="92" width="5" height="8" rx="1" fill="#D1D5DB"/>
-          <circle cx="123.5" cy="90" r="3" fill="#10B981"/>
-          <circle cx="125.5" cy="89" r="2.5" fill="#059669"/>
-        </svg>
-      </div>
+{/* Shrunk CRM Discussion Illustration Area */}
+<div className="w-full flex justify-center mb-2">
+  <motion.img
+    src="https://cdn1.iconfinder.com/data/icons/business-and-communication-2/731/Flat_Blue-18-02-512.png"
+    alt="CRM"
+    animate={{
+      y: [0, -4, 0],
+      rotate: [0, 0.5, 0],
+    }}
+    transition={{
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+    whileHover={{
+      scale: 1.02,
+    }}
+    className="h-24 w-auto object-contain drop-shadow-xl"
+  />
+</div>
 
-      {/* Action CTA Button */}
-      <button 
-        onClick={() => onNavigate('calendly')}
-        className="w-full bg-[#1A56DB] text-white font-bold py-2.5 px-3 rounded-lg hover:bg-blue-700 transition-all active:scale-[0.99] shadow-md shadow-blue-600/10 mb-3 text-xs tracking-wide"
-      >
-        Book Demo
-      </button>
+{/* Small Action CTA Button */}
+<button 
+  onClick={() => onNavigate('calendly')}
+  className="w-full bg-[#1A56DB] text-white font-bold py-1.5 px-2 rounded-md hover:bg-blue-700 transition-all active:scale-[0.99] shadow-sm shadow-blue-600/10 text-[11px] tracking-wide"
+>
+  Book Demo
+</button>
 
       {/* Trust metrics footer strip */}
       <div className="flex items-center justify-center gap-3 text-[9px] font-bold text-slate-400 tracking-wider uppercase border-t border-slate-100 pt-2.5">

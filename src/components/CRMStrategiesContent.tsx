@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { 
   TrendingUp, CheckCircle2, ChevronRight, Zap, Target, 
   ClipboardList, Settings, UserCheck, Cpu, Database, 
@@ -16,66 +16,123 @@ const STRATEGIES = [
   { title: "Team Collaboration", icon: Share2, desc: "Eliminate communication silos across departments.", n: "08", color: "text-blue-800", bg: "bg-blue-100" }
 ];
 
+// --- Framer Motion Design Tokens ---
+const underlineVariants: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  visible: { 
+    pathLength: 1, 
+    opacity: 1,
+    transition: { delay: 0.8, duration: 0.8, ease: "easeInOut" }
+  }
+};
+
+const trunkProgressVariants: Variants = {
+  hidden: { scaleY: 0 },
+  visible: { 
+    scaleY: 1,
+    transition: { duration: 1.8, ease: [0.16, 1, 0.3, 1] } 
+  }
+};
+
 export default function CRMStrategiesContent() {
   return (
     <div className="bg-white font-sans selection:bg-blue-100 selection:text-blue-600 overflow-x-hidden">
       
       {/* --- CENTERED HERO SECTION --- */}
       <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-slate-50/50">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-blue-600/5 blur-[120px] rounded-full -translate-y-1/2" />
+        {/* Infinite interactive atmosphere aura */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.12, 1],
+            x: ["-50%", "-47%", "-50%"],
+            y: ["-50%", "-53%", "-50%"]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 left-1/2 w-full h-full bg-blue-600/5 blur-[120px] rounded-full" 
+        />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col items-center text-center max-w-4xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-widest mb-8">
-              <Sparkles className="w-3 h-3" />
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+            {/* Spinning pill component banner */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.93 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-bold uppercase tracking-widest mb-8 cursor-default select-none"
+            >
+              <Sparkles className="w-3 h-3 animate-spin" style={{ animationDuration: '3s' }} />
               Strategic Optimization
-            </div>
+            </motion.div>
             
-            <h1 className="text-6xl md:text-8xl font-black text-slate-900 leading-[1.05] mb-8 tracking-tight">
+            {/* Structural Header Layout with path rendering stroke */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-6xl md:text-8xl font-black text-slate-900 leading-[1.05] mb-8 tracking-tight"
+            >
               8 Proven <br/>
-              <span className="relative inline-block text-blue-600">
+              <span className="relative inline-block text-blue-600 pb-3">
                 CRM Practices
-                
-                  <path d="M1 9.5C50.5 4.5 150.5 1.5 299 9.5" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-              
+                <svg className="absolute left-0 bottom-0 w-full h-3 text-blue-500 pointer-events-none" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <motion.path 
+                    variants={underlineVariants}
+                    initial="hidden"
+                    animate="visible"
+                    d="M1 9.5C50.5 4.5 150.5 1.5 299 9.5" 
+                    stroke="currentColor" 
+                    strokeWidth="4" 
+                    strokeLinecap="round" 
+                  />
+                </svg>
               </span>
-            </h1>
+            </motion.h1>
             
-            <p className="text-xl text-slate-500 leading-relaxed mb-12 max-w-2xl font-medium">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-xl text-slate-500 leading-relaxed mb-12 max-w-2xl font-medium"
+            >
               A powerful CRM system brings all your customer data into one place. 
               Follow these strategies to synchronize your entire business operation.
-            </p>
+            </motion.p>
 
-            <div className="flex justify-center">
-              <button className="px-10 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all flex items-center gap-2">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              <motion.button 
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-10 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-colors flex items-center gap-2"
+              >
                 Download Strategy Map <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          </motion.div>
+              </motion.button>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* --- TREE MIND MAP SECTION --- */}
       <section className="relative py-24 overflow-hidden">
         {/* Large Watermark Background */}
-        <div className="absolute top-40 left-1/2 -translate-x-1/2 opacity-[0.03] select-none pointer-events-none">
+        <div className="absolute top-40 left-1/2 -translate-x-1/2 opacity-[0.015] select-none pointer-events-none">
           <span className="text-[300px] font-black text-slate-900 leading-none">STRATEGY</span>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="relative py-20">
-            {/* The Trunk (Vertical Line) */}
+            {/* The Dynamic Timeline Trunk (Vertical Line Alignment) */}
             <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-slate-100 -translate-x-1/2 hidden md:block">
               <motion.div 
-                initial={{ height: 0 }}
-                whileInView={{ height: '100%' }}
-                viewport={{ once: true }}
-                className="w-full bg-blue-600 origin-top"
-                transition={{ duration: 1.5, ease: "easeInOut" }}
+                variants={trunkProgressVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+                className="w-full h-full bg-blue-600 origin-top"
               />
             </div>
 
@@ -83,41 +140,57 @@ export default function CRMStrategiesContent() {
               {STRATEGIES.map((strat, i) => (
                 <div key={i} className={`flex flex-col md:flex-row items-center gap-8 md:gap-0 ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                   
-                  {/* Content Card Side */}
+                  {/* Content Card Deck Frame */}
                   <motion.div 
-                    initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
+                    initial={{ opacity: 0, x: i % 2 === 0 ? 40 : -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-120px" }}
+                    transition={{ type: "spring", stiffness: 80, damping: 15 }}
                     className={`flex-1 w-full md:w-auto ${i % 2 === 0 ? 'md:pl-20' : 'md:pr-20'}`}
                   >
-                    <div className={`p-8 bg-white border border-slate-100 rounded-[32px] shadow-sm hover:shadow-xl hover:shadow-blue-600/5 transition-all group ${i % 2 === 0 ? 'text-left' : 'md:text-right'}`}>
-                      <div className={`inline-flex items-center justify-center w-12 h-12 ${strat.bg} ${strat.color} rounded-xl font-black text-xl mb-6 shadow-sm`}>
+                    <motion.div 
+                      whileHover={{ 
+                        y: -6, 
+                        boxShadow: "0 20px 40px rgba(37, 99, 235, 0.04)", 
+                        borderColor: "rgba(37, 99, 235, 0.25)" 
+                      }}
+                      whileTap={{ 
+                        scale: 0.98,
+                        borderColor: "rgba(37, 99, 235, 0.45)",
+                        backgroundColor: "rgba(248, 250, 252, 0.95)"
+                      }}
+                      className={`p-8 bg-white border border-slate-100 rounded-[32px] shadow-sm transition-all duration-200 group cursor-pointer select-none ${i % 2 === 0 ? 'text-left' : 'md:text-right'}`}
+                    >
+                      <div className={`inline-flex items-center justify-center w-12 h-12 ${strat.bg} ${strat.color} rounded-xl font-black text-xl mb-6 shadow-sm group-hover:scale-105 group-active:scale-95 transition-transform duration-300`}>
                         {strat.n}
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{strat.title}</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                        {strat.title}
+                      </h3>
                       <p className="text-slate-500 leading-relaxed font-medium">
                         {strat.desc}
                       </p>
-                    </div>
+                    </motion.div>
                   </motion.div>
 
-                  {/* Branch Node (The Icon) */}
+                  {/* Mechanical Branch Node (The Focal Icon) */}
                   <div className="relative flex-shrink-0 z-10">
                     <motion.div 
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                      className="w-16 h-16 bg-white border-4 border-white shadow-xl rounded-2xl flex items-center justify-center text-slate-900 relative ring-4 ring-slate-50"
+                      viewport={{ once: true, margin: "-60px" }}
+                      transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                      whileHover={{ scale: 1.1 }}
+                      className="w-16 h-16 bg-white border-4 border-white shadow-xl rounded-2xl flex items-center justify-center text-slate-900 relative ring-4 ring-slate-50 cursor-pointer"
                     >
                       <strat.icon className={`w-8 h-8 ${strat.color}`} />
                       
-                      {/* Horizontal Branch Line (Desktop Only) */}
+                      {/* Horizontal Branch Anchor Lines (Desktop Scale Blueprint) */}
                       <div className={`absolute top-1/2 -translate-y-1/2 h-[2px] bg-slate-100 w-20 -z-10 hidden md:block ${i % 2 === 0 ? 'left-full' : 'right-full'}`} />
                     </motion.div>
                   </div>
 
-                  {/* Spacing Offset */}
+                  {/* Layout Isolation Spacing Offset */}
                   <div className="flex-1 hidden md:block" />
                 </div>
               ))}
@@ -126,13 +199,20 @@ export default function CRMStrategiesContent() {
         </div>
       </section>
 
-      {/* --- CONCLUSION SECTION --- */}
+      {/* --- CONCLUSION SECTION (Structured Deck Frame) --- */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <motion.div 
-          whileHover={{ scale: 1.005 }}
-          className="bg-slate-900 rounded-[48px] p-12 text-white relative overflow-hidden"
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 65 }}
+          whileHover={{ y: -4 }}
+          className="bg-slate-900 rounded-[48px] p-12 text-white relative overflow-hidden shadow-2xl"
         >
-          <div className="absolute top-0 right-0 p-12 opacity-5">
+          {/* Subtle gradient shading layer */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent pointer-events-none" />
+          
+          <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
             <TrendingUp className="w-64 h-64" />
           </div>
           
@@ -140,15 +220,19 @@ export default function CRMStrategiesContent() {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-600 rounded-lg text-xs font-bold uppercase tracking-widest mb-6">
               Final Summary
             </div>
-            <h2 className="text-4xl font-bold mb-6 tracking-tight">Conclusion</h2>
+            <h2 className="text-4xl font-bold mb-6 tracking-tight text-white">Conclusion</h2>
             <p className="text-xl text-slate-400 mb-10 leading-relaxed font-medium">
               By following these strategies, your business can unlock the full potential of your CRM system. 
               A well-optimized CRM empowers your teams, improves efficiency, and scales with your success.
             </p>
-            <button className="group flex items-center gap-2 font-bold text-blue-400 hover:text-white transition-all text-lg">
+            <motion.button 
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex items-center gap-2 font-bold text-blue-400 hover:text-white transition-colors text-lg"
+            >
               Get Started with Your Strategy Now 
-              <ChevronRight className="group-hover:translate-x-2 transition-transform" />
-            </button>
+              <ChevronRight className="group-hover:translate-x-2 transition-transform duration-300" />
+            </motion.button>
           </div>
         </motion.div>
       </section>
@@ -156,7 +240,7 @@ export default function CRMStrategiesContent() {
       {/* --- FOOTER SPACING --- */}
       <div className="py-20 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-6 text-center">
-            <p className="text-slate-400 font-medium tracking-wide italic">"Structure defines speed. Strategy defines success."</p>
+          <p className="text-slate-400 font-medium tracking-wide italic">"Structure defines speed. Strategy defines success."</p>
         </div>
       </div>
     </div>

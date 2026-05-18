@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { 
   Target, BarChart3, FileText, CreditCard, Package, 
   CheckSquare, MapPin, Users, PieChart, Mail, 
@@ -7,12 +7,12 @@ import {
   ChevronDown, PlayCircle, Factory, Monitor
 } from "lucide-react";
 
-// --- DATA STRUCTURES ---
+// --- UPDATED STATS DATA TO MATCH UPLOADED LAYOUT ---
 const stats = [
-  { val: "2x", label: "High Response" },
-  { val: "40%", label: "Lower Errors" },
-  { val: "GPS", label: "Live Tracking" },
-  { val: "SSL", label: "Data Security" }
+  { val: "94.2%", label: "Attendance Today", change: "↑ 2.4% vs yesterday", color: "text-emerald-600", bg: "bg-emerald-50/60" },
+  { val: "12", label: "Leave Requests", change: "3 pending approval", color: "text-amber-600", bg: "bg-amber-50/60" },
+  { val: "₹48.2L", label: "Payroll Processed", change: "This month • On time", color: "text-blue-600", bg: "bg-blue-50/60" },
+  { val: "10,000+", label: "Active Workers", change: "Verified securely", color: "text-purple-600", bg: "bg-purple-50/60" }
 ];
 
 const allModules = [
@@ -34,24 +34,60 @@ const industryData = [
   { id: "02", label: "SAAS / IT", title: "Technology", desc: "Subscription tracking and customer success workflows.", icon: Monitor }
 ];
 
-export default function CoreCRMFeatures() {
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
+// --- FRAMER MOTION DESIGN TOKENS ---
+const gridContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.04 }
+  }
+};
 
+const moduleCardVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: { type: "spring", stiffness: 90, damping: 15 }
+  }
+};
+
+export default function CoreCRMFeatures() {
   return (
     <div className="bg-white font-sans selection:bg-blue-100 selection:text-blue-600 overflow-x-hidden">
       
       {/* --- HERO SECTION --- */}
       <section className="relative pt-32 pb-20 overflow-hidden bg-slate-50/50">
+        {/* Infinite floating atmospheric background canvas */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.12, 1],
+            x: ["-50%", "-48%", "-50%"],
+            y: ["-50%", "-52%", "-50%"]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 left-1/2 w-full h-full bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" 
+        />
+
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }} 
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 leading-tight mb-8 tracking-tight">
               Everything you need in <br/>
-              <span className="relative inline-block text-blue-600">
+              <span className="relative inline-block text-blue-600 pb-2">
                 one platform
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-600/20" />
+                <motion.div 
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.5, duration: 0.8, ease: "easeInOut" }}
+                  className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 origin-left" 
+                />
               </span>
             </h1>
-            <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium">
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">
               A unified ecosystem built for modern teams to streamline sales, 
               operations, and customer management.
             </p>
@@ -59,60 +95,128 @@ export default function CoreCRMFeatures() {
         </div>
       </section>
 
-      {/* --- BUSINESS IMPACT STATS (Ref Image 2) --- */}
-      <div className="py-12 border-y border-slate-100 bg-white">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl font-black text-slate-900">{stat.val}</div>
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">{stat.label}</div>
-            </div>
-          ))}
+      {/* --- BUSINESS IMPACT STATS (BOXES WITH FLUID LEFT MOVEMENT LOOP) --- */}
+      <div className="py-14 border-y border-slate-100 bg-white relative z-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div 
+            className="flex gap-6 md:grid md:grid-cols-4 w-full"
+            animate={{ x: ["0%", "-4%", "0%"] }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            {stats.map((stat, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 100, 
+                  damping: 20, 
+                  delay: i * 0.1 
+                }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="min-w-[260px] md:min-w-0 flex-1 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm shadow-slate-100/80 flex flex-col justify-between transition-shadow hover:shadow-md"
+              >
+                <div>
+                  <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">{stat.label}</div>
+                  <div className="text-3xl font-black text-slate-900 tracking-tight">{stat.val}</div>
+                </div>
+                <div className={`mt-4 inline-flex items-center self-start px-2.5 py-1 rounded-md text-xs font-bold ${stat.color} ${stat.bg}`}>
+                  {stat.change}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
 
-      {/* --- FEATURE GRID SECTION (Ref Image 1) --- */}
+      {/* --- FEATURE GRID SECTION --- */}
       <section id="features-target" className="relative py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={gridContainerVariants}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
             {allModules.map((mod, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="group p-8 bg-white border border-slate-100 rounded-[32px] shadow-sm hover:shadow-2xl hover:shadow-blue-600/5 transition-all"
+                variants={moduleCardVariants}
+                whileHover={{ 
+                  y: -8, 
+                  boxShadow: "0 20px 40px rgba(37, 99, 235, 0.04)", 
+                  borderColor: "rgba(37, 99, 235, 0.25)" 
+                }}
+                whileTap={{ 
+                  scale: 0.97,
+                  borderColor: "rgba(37, 99, 235, 0.5)",
+                  backgroundColor: "rgba(248, 250, 252, 0.95)",
+                  boxShadow: "0 4px 12px rgba(37, 99, 235, 0.08)"
+                }}
+                className="group p-8 bg-white border border-slate-100 rounded-[32px] shadow-sm transition-all duration-200 cursor-pointer select-none"
               >
                 <div className="flex justify-between items-start mb-6">
-                  <div className={`w-14 h-14 rounded-2xl ${mod.bg} ${mod.color} flex items-center justify-center transition-transform group-hover:scale-110`}>
+                  <div className={`w-14 h-14 rounded-2xl ${mod.bg} ${mod.color} flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-active:scale-95`}>
                     <mod.icon className="w-7 h-7" />
                   </div>
-                  <span className="text-sm font-black text-slate-100 group-hover:text-blue-50 transition-colors">{mod.id}</span>
+                  <span className="text-sm font-black text-slate-200 group-hover:text-blue-200 group-active:text-blue-300 transition-colors duration-300">
+                    {mod.id}
+                  </span>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight group-hover:text-blue-600 transition-colors">{mod.title}</h3>
-                <p className="text-slate-500 text-sm font-medium leading-relaxed">{mod.desc}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight group-hover:text-blue-600 transition-colors duration-300">
+                  {mod.title}
+                </h3>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                  {mod.desc}
+                </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="mt-16 flex flex-wrap justify-center gap-4">
-            <button className="px-10 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all flex items-center gap-2">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="mt-16 flex flex-wrap justify-center gap-4"
+          >
+            <motion.button 
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-10 py-5 bg-blue-600 text-white font-bold rounded-2xl shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-colors flex items-center gap-2"
+            >
               Explore CRM <ArrowRight className="w-4 h-4" />
-            </button>
-            <button className="px-10 py-5 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 hover:border-blue-600 transition-all">
+            </motion.button>
+            <motion.button 
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-10 py-5 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 hover:border-blue-600 transition-colors"
+            >
               Schedule a Demo
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
-      {/* --- INDUSTRY SECTION (Ref Image 1 bottom) --- */}
+      {/* --- INDUSTRY SECTION --- */}
       <section className="bg-slate-50/50 py-24 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-16">
           <div className="lg:w-1/2">
             <div className="flex items-center gap-4 mb-6">
-               <div className="w-12 h-[1px] bg-blue-600" />
+               <motion.div 
+                 initial={{ width: 0 }}
+                 whileInView={{ width: 48 }}
+                 viewport={{ once: true }}
+                 transition={{ duration: 0.6 }}
+                 className="h-[2px] bg-blue-600" 
+               />
                <span className="text-blue-600 font-bold uppercase tracking-widest text-xs">Industries</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight">
@@ -129,18 +233,30 @@ export default function CoreCRMFeatures() {
             {industryData.map((ind, i) => (
               <motion.div 
                 key={i}
-                whileHover={{ x: 10 }}
-                className="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm flex items-center gap-8 group"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ type: "spring", stiffness: 80, delay: i * 0.1 }}
+                whileHover={{ 
+                  x: 8,
+                  borderColor: "rgba(37, 99, 235, 0.25)",
+                  boxShadow: "0 12px 30px rgba(37, 99, 235, 0.03)"
+                }}
+                whileTap={{
+                  scale: 0.99,
+                  borderColor: "rgba(37, 99, 235, 0.45)"
+                }}
+                className="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm flex items-center gap-8 group cursor-pointer select-none transition-all duration-200"
               >
-                <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                <div className="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 group-active:scale-95 transition-transform duration-300">
                   <ind.icon className="w-8 h-8" />
                 </div>
                 <div className="flex-1">
                    <span className="text-[10px] font-black text-blue-600 tracking-widest uppercase mb-1 block">{ind.label}</span>
-                   <h4 className="text-2xl font-bold text-slate-900 mb-1">{ind.title}</h4>
+                   <h4 className="text-2xl font-bold text-slate-900 mb-1 group-hover:text-blue-600 transition-colors duration-300">{ind.title}</h4>
                    <p className="text-slate-500 font-medium text-sm">{ind.desc}</p>
                 </div>
-                <div className="text-5xl font-black text-slate-50 group-hover:text-blue-50 transition-colors">{ind.id}</div>
+                <div className="text-5xl font-black text-slate-100 group-hover:text-blue-200 group-active:text-blue-300 transition-colors duration-300">{ind.id}</div>
               </motion.div>
             ))}
           </div>
@@ -150,15 +266,36 @@ export default function CoreCRMFeatures() {
       {/* --- FINAL CTA --- */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="bg-slate-900 rounded-[48px] p-12 md:p-24 text-white text-center relative overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ type: "spring", stiffness: 60 }}
+            whileHover={{ y: -4 }}
+            className="bg-slate-900 rounded-[48px] p-12 md:p-24 text-white text-center relative overflow-hidden shadow-2xl"
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent pointer-events-none" />
+            
             <div className="relative z-10 max-w-3xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-black mb-8 tracking-tight text-white">Ready to Transform Your Operations?</h2>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button className="px-12 py-5 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition-all">Start Free Trial</button>
-                <button className="px-12 py-5 bg-white text-slate-900 font-bold rounded-2xl hover:bg-slate-100 transition-all">Book a Free Demo</button>
+                <motion.button 
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-12 py-5 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 shadow-lg shadow-blue-600/10 transition-colors"
+                >
+                  Start Free Trial
+                </motion.button>
+                <motion.button 
+                  whileHover={{ scale: 1.04, y: -2, backgroundColor: "#f8fafc" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-12 py-5 bg-white text-slate-900 font-bold rounded-2xl transition-all"
+                >
+                  Book a Free Demo
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
